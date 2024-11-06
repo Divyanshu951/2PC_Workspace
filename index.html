@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            font-family: "Noto Sans", sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            /* Light mode background color */
+            color: #000;
+            /* Light mode text color */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Dark mode background color */
+            color: #fff;
+            /* Dark mode text color */
+        }
+
+        body.dark-mode2 {
+            background-color: #080e2c;
+            /* Dark mode background color */
+            color: #fff;
+            /* Dark mode text color */
+        }
+
+        .popup {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: white;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .popup input {
+            margin: 5px 0;
+        }
+
+        #text-container {
+            max-width: 50%;
+            margin: 0 auto;
+        }
+
+        .copyable-line {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding-right: 2px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Dark mode switch styles */
+
+        .dark-mode-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .refund {
+            /*position: ;*/
+            top: 480px;
+            right: 20px;
+            background-color: #ccc;
+            padding: 2px;
+            cursor: pointer;
+            border-radius: 5px;
+
+            font-size: 6px;
+            /*width: 300px;*/
+            color: black;
+            border-radius: 10px;
+            border-style: double;
+            border-color: white;
+            background-color: black;
+        }
+
+        /*NOTEPAD*/
+
+        .notepad {
+            position: fixed;
+            bottom: 0px;
+            right: 5px;
+            width: 300px;
+            height: 125px;
+            padding: 10px;
+            /*border: 0.001px solid #ccc;*/
+            border-radius: 25px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 16px;
+            padding-top: 60px;
+            /* Adjust padding to make space for inputs */
+        }
+
+        .inputs {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .inputs input {
+            width: 20%;
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        .labels {
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .labels span {
+            width: 20%;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .result {
+            font-size: 20px;
+            margin-top: 10px;
+            position: absolute;
+            top: 55px;
+        }
+
+        .not-pos {
+            position: fixed;
+            bottom: 0px;
+            right: 0px;
+        }
+
+        /*NOTEPAD END*/
+
+        /* df */
+
+        #mydiv {
+            position: fixed;
+            z-index: 9;
+            background-color: #f1f1f1;
+            text-align: center;
+            border: 0px solid #d3d3d3;
+            border-radius: 8px;
+        }
+
+        #mydivheader {
+            padding: 10px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196F3;
+            color: #fff;
+            border-radius: 8px;
+            margin: 1px;
+        }
+
+
+        .date-container {
+            width: 410px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #131111;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ccc;
+
+            resize: both;
+            overflow: auto;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            margin-top: 0px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input[type="date"] {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        td {
+            background-color: #fafafa;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 132px;
+            color: black;
+        }
+
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.copied {
+            background-color: #28a745;
+        }
+
+        #resultArea {
+            margin-top: 10px;
+        }
+
+        #resultArea button {
+            width: 100%;
+            background-color: #dc3545;
+        }
+
+        #resultArea button:hover {
+            background-color: #c82333;
+        }
+
+        .notepad-xx {
+            position: fixed;
+            left: 5px;
+            width: 300px;
+            height: 100px;
+            padding: 15px;
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            resize: both;
+            overflow: auto;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        .notepad-xx:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .copyable-line69 {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            /* Adds space between the text and the "i" icon */
+        }
+
+        .hover-circle-container {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .hover-circle {
+            width: 20px;
+            height: 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .hover-tooltip {
+            visibility: hidden;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px;
+            position: absolute;
+            left: 100%;
+            /* Position beside the circle */
+            top: 50%;
+            transform: translateY(-50%);
+            margin-left: 10px;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        .hover-circle:hover+.hover-tooltip {
+            visibility: visible;
+        }
+
+        #timer-container {
+            position: fixed;
+            bottom: 5px;
+            left: 5px;
+            width: 200px;
+            /* Default width */
+            height: 15x;
+            /* Default height */
+            resize: both;
+            /* Allows resizing */
+            overflow: auto;
+        }
+
+        /* Slider Container */
+
+        .slider-container69 {
+            position: relative;
+        }
+
+        /* Side Panel */
+
+        .side-panel69 {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 400px;
+            max-width: 80%;
+            background-color: #ffffff;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            /* Allow scrolling if content exceeds height */
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hide scrollbar for the side panel */
+
+        .side-panel69::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar for WebKit browsers */
+        }
+
+        /* For Firefox */
+
+        .side-panel69 {
+            scrollbar-width: none;
+            /* Hide scrollbar for Firefox */
+        }
+
+        /* For other browsers */
+
+        .side-panel69 {
+            -ms-overflow-style: none;
+            /* Hide scrollbar for Internet Explorer and Edge */
+        }
+
+        /* Chat content styling */
+
+        .chat-content69 {
+            color: black;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #b6b2b2;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            height: calc(100% - 80px);
+            /* Full height minus button and title */
+            overflow-y: auto;
+            /* Allow scrolling if content exceeds height */
+        }
+
+        /* Toggle Button */
+
+        .toggle-button69 {
+            position: fixed;
+            top: 77.5%;
+            left: 0;
+            transform: translateY(-50%);
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: left 0.3s ease;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Open state */
+
+        .side-panel69.open {
+            transform: translateX(0);
+        }
+
+        .toggle-button69.open {
+            left: 0;
+        }
+
+        /* Copyable line and tooltip styles */
+
+        .copyable-line69 {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding: 10px;
+            border: 2px solid red;
+            /* Red borders for the new line */
+            margin-top: 10px;
+            /* Add some spacing */
+            border-radius: 5px;
+            background-color: #ffffff;
+            transition: background-color 0.3s;
+            white-space: pre-wrap;
+            /* Preserve whitespace and line breaks */
+            word-wrap: break-word;
+            /* Break long words if necessary */
+        }
+
+        .copyable-line69:hover {
+            background-color: #f0f0f0;
+            /* Change background on hover */
+        }
+
+        /* Horizontal line between title and text */
+
+        .line69 {
+            border-top: 1px solid #ddd;
+            /* Style of the line */
+            margin: 5px 0;
+            /* Spacing */
+        }
+
+        .tooltip69 {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip69 .tooltiptext69 {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip69 .tooltiptext69::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip69:hover .tooltiptext69 {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Button to add a new line */
+
+        .add-line-button69 {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .add-line-button69:hover {
+            background-color: #45a049;
+            /* Darken on hover */
+        }
+
+        /* Custom input styling */
+
+        .input-line69 {
+            margin-top: 10px;
+            display: none;
+            /* Initially hidden */
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-field69,
+        .title-field69 {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            /* Full width */
+            resize: vertical;
+            /* Allow vertical resizing */
+            min-height: 50px;
+            /* Minimum height */
+        }
+
+        .submit-button69 {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .submit-button69:hover {
+            background-color: #45a049;
+            /* Darken on hover */
+        }
+
+        /* Dark mode styles for the side panel */
+
+        .side-panel69.dark-mode {
+            background-color: #242424;
+            color: #fff;
+            /* border-color: #444; */
+        }
+
+        .chat-content69.dark-mode {
+            /* background-color: #333; */
+            border-color: #444;
+        }
+
+        .copyable-line69.dark-mode {
+            /* background-color: #444; */
+            border-color: red;
+            /* Keep red borders */
+        }
+
+        /* Dark mode icon */
+
+        .dark-mode-icon69 {
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            color: #4CAF50;
+            /* Icon color */
+            transition: color 0.3s;
+        }
+
+        .dark-mode-icon69:hover {
+            color: #45a049;
+            /* Darken on hover */
+        }
+
+        /* New line container styling */
+
+        .line-container69 {
+            margin-top: 10px;
+            /* Space between line containers */
+            width: 100%;
+            /* Full width for each line container */
+        }
+    </style>
+
+    <link rel="icon" type="image/png" href="https://www.20i.com/blog/wp-content/uploads/2020/10/Favicons-740x416.png">
+</head>
+
+<body>
+
+
+    <div id="color-picker-popup" class="popup" style="display: none;">
+        <h4>Customize Colors:</h4>
+        <label for="bg-color">Background Color (Hex):</label>
+        <input type="text" id="bg-color" placeholder="#000000">
+        <br>
+        <label for="text-color">Text Color (Hex):</label>
+        <input type="text" id="text-color" placeholder="#ffffff">
+        <br>
+        <button id="submit-colors" onclick="applyCustomColors()">Submit</button>
+    </div>
+
+    <textarea class="notepad-xx" placeholder="This is a resizable notepad. You can type here..."></textarea>
+
+    <div id="mydiv">
+        <div id="mydivheader">Click here to move</div>
+        <div class="date-container">
+            <h1 style="color: white;">Date Calculator</h1>
+
+            <label for="datePicker" style="color: white;">Select Date:</label>
+            <input type="date" id="datePicker" onchange="showResults()"><br><br>
+
+            <table>
+                <tr>
+                    <th>Result Type</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color:orangered;font-weight:bold;">[Desired]</span> <span style="color:black;">
+                        <input id="desiredOffset" type="number" value="0" onchange="calculateDesired()" style="font-weight: bold; font-size: 20px; width: 50px;">
+                        </span>
+                    </td>
+                    <td id="desiredDateResult"></td>
+                    <td><button id="desiredDateBtn" onclick="copyToClipboard2('desiredDateResult', 'desiredDateBtn')">Copy</button></td>
+                </tr>
+                <tr>
+                    <td><span style="color:orangered;font-weight:bold;">[IRD]</span> <span style="color:black;">Date + 30</span></td>
+                    <td id="plus30Result"></td>
+                    <td><button id="plus30Btn" onclick="copyToClipboard2('plus30Result', 'plus30Btn')">Copy</button></td>
+                </tr>
+                <tr>
+                    <td><span style="color:orangered;font-weight:bold;">[3DI]</span> <span style="color:black;">Date + 3</span></td>
+                    <td id="plus3Result"></td>
+                    <td><button id="plus3Btn" onclick="copyToClipboard2('plus3Result', 'plus3Btn')">Copy</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color:orangered;font-weight:bold;">[IR]</span> <span style="color:black;">
+                        <select id="irOffset" onchange="calculateIR()" style="font-weight: bold; font-size: 20px;">
+                            <option value="60">60</option>
+                            <option value="90">90</option>
+                        </select>
+                        </span>
+                    </td>
+                    <td id="irDateResult"></td>
+                    <td><button id="irDateBtn" onclick="copyToClipboard2('irDateResult', 'irDateBtn')">Copy</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color:orangered;font-weight:bold;">[RD]</span> <span style="color:black;"> +
+                        <select id="dynamicOffset1" onchange="calculateRD()" style="font-weight: bold; font-size: 20px;">
+                            <option value="7">7</option>
+                            <option value="14" selected>14</option>
+                            <option value="30">30</option>
+                            <option value="60">60</option>
+                        </select>
+                        </span>
+                    </td>
+                    <td id="dynamicDateResult1"></td>
+                    <td><button id="dynamicDateBtn1" onclick="copyToClipboard2('dynamicDateResult1', 'dynamicDateBtn1')">Copy</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color:orangered;font-weight:bold;">[PDD]</span> <span style="color:black;"> +
+                        <select id="dynamicOffset2" onchange="calculatePDD()" style="font-weight: bold; font-size: 20px;">
+                            <option value="14">14</option>
+                            <option value="30">30</option>
+                            <option value="90" selected>90</option>
+                        </select>
+                        </span>
+                    </td>
+                    <td id="dynamicDateResult2"></td>
+                    <td><button id="dynamicDateBtn2" onclick="copyToClipboard2('dynamicDateResult2', 'dynamicDateBtn2')">Copy</button></td>
+                </tr>
+            </table>
+
+
+
+            <div id="resultArea">
+                <button onclick="resetResults()">Reset</button>
+            </div>
+        </div>
+
+    </div>
+    <!--======================ANNOTATIONS======================-->
+
+    <!-- collapsable chat box -->
+
+    <div class="slider-container69">
+        <!-- Collapsible Side Panel -->
+        <div class="side-panel69" id="sidePanel69">
+            <span class="dark-mode-icon69" onclick="toggleDarkMode()">🌙</span>
+            <h2>Custom Lines</h2>
+            <div class="chat-content69" id="chatContent69">
+                <!-- Chat content will be added here -->
+            </div>
+            <!-- Button to add a new line -->
+            <button class="add-line-button69" onclick="showInputField()">Add Line</button>
+
+            <!-- Input line to add custom text -->
+            <div class="input-line69" id="inputLine69">
+                <input type="text" id="titleInput69" class="title-field69" placeholder="Enter title" />
+                <textarea id="customTextInput69" class="input-field69" placeholder="Enter text" rows="5"></textarea>
+                <button class="submit-button69" onclick="addLine()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Toggle Button -->
+        <button class="toggle-button69" style="width: 35px;" id="toggleButton69" onclick="togglePanel()">☰</button>
+    </div>
+    <h1 style="color:white; text-align: center; text-decoration: underline;">CAP Script </h1>
+
+    <h3 style="color:red; text-align: center;"> OPENING: </h3>
+
+    <div id="text-container">
+        <p style="color: DodgerBlue; cursor: pointer;" onclick="copyToClipboard(this)">
+            <span style="position: relative;">
+                <span id="greeting-text">Hello, My name is <span id="name-placeholder">[Insert_Name_Below_and_Press_Enter]</span>. How may I help you today?</span>
+            <span style="visibility: hidden; position: absolute; background-color: black; color: #fff; text-align: center; padding: 5px; border-radius: 5px; top: -30px; left: 50%; transform: translateX(-50%);" class="tooltiptext"></span>
+            </span>
+        </p>
+
+        <input type="text" id="name-input" value="Divyanshu @divyande" placeholder="Enter your name" onkeydown="updateName(event)" style="margin-top: 10px;">
+
+
+        <!-- change -->
+
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Terribly sorry about the whole experience, we really never want any of our customer to suffer through such incidents.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+        <!-- Add more lines as needed -->
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Could you please confirm if you received empty box with missing item or nothing was delivered?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I apologize for the inconvenience.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Please give me a moment to analyze your previous conversation.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:red; text-align: center;"> WAITING: </h3>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Could you please stay connected for two minutes while I check this for you?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I’m sorry this is taking longer than expected, could you please stay connected for another 2 minutes while I check this for you?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Thank you for staying connected.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <h3 style="color:red; text-align: center;"> REFUND/REPLACEMENT CONFIRMATION: </h3>
+
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I can create a return label and you will receive the full refund once we receive the order, Is that alright with you?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Would you like the return to be an label less drop off or a normal pick up for return?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h4 style="color:Violet;"> RETURNS: </h4>
+
+        <p style="color:#98FB98;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I've successfully requested a return request for your order. You’ll receive a return label request confirmation e-mail just after this chat ends.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h4 style="color:Violet;"> REFUND: </h4>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I've successfully initiated a refund for your order. You'll see this refund in 5 - 7 days in your account. You’ll receive a refund confirmation e-mail once it’s completed.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:red; text-align: center;"> Others:</h3>
+
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Just to confirm, Are you referring to the item XXXXX?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Thank you for confirming.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:red; text-align: center;"> INCIDENT REPORT 📝</h3>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        In order to go ahead with the refund process we request you to please fill out the report that I will send you right after this chat ends through email and reply back to the same email with your responses.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerDodgerBlueBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:Violet;">
+        I apologize that you haven't received your item. To better understand the issue and investigate the problem, please complete the incident report that I have emailed to you. Once you have completed and returned the Incident Report, we’ll review and let you know the status of your request.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:Violet;">
+        <span class="copyable-content">
+            Please return the Incident Report on or before 
+            <span style="color:red;" id="formattedDate2">
+                <span id="IRdateforline">DATE</span>
+            <!-- Default text when no date is selected -->
+            </span> to be considered for review.
+            </span>
+            <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+            <span class="hover-circle-container">
+        <span class="hover-circle"> </span>
+            <span class="hover-tooltip">Choose the date on dateCalc and it will be added to the line</span>
+            </span>
+        </p>
+
+
+
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        You will receive the email just after this chat ends.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:red; text-align: center;"> 3DI⏰ </h3>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:DodgerBlue;">
+                I'm sorry to hear that you haven't received your item. We need to investigate further and ask that you please wait three days. If you still haven't received your item, please contact us again after
+                <span style="color:red;" id="formattedDate">
+                    <span id="threeDaysDateResult"></span>
+            <!-- This will show the calculated date -->
+            </span>.
+            <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+            <span class="hover-circle-container">
+                <span class="hover-circle">!</span>
+            <span class="hover-tooltip">Choose the date on dateCalc and it will be added to the line</span>
+            </span>
+        </p>
+
+
+        <h3 style="color:red; text-align: center;"> Transfers and Others:</h3>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        PLEASE IGNORE THE LAST ANNOTATION.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Me and my manager share the same resources and they might have the same resolution.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Please stay connected while i transfer this chat to my manager.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        cx wanted to talk to my manager, Hence escalated.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:red; text-align: center;"> CLOSING: </h3>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Is there anything else I can help you with today apart from this?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Thank you for your understanding.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+        <p style="color:#98FB98;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        You're most welcome
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:#FFFF00;">
+        You're welcome. It was a pleasure assisting you today. Thank you for contacting Amazon Support. Have a great day! Bye. Take Care :).
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:white;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:#;">
+        It was a pleasure assisting you today. Thank you for contacting Amazon Support. Have a great day! Bye. Take Care :).
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Your chat session has been idle for 2 minutes, so I'm closing this session. Feel free to get in touch with us again if you have any more concerns, It was a pleasure assisting you today. Thank you for contacting Amazon Support. Have a great day! Bye. Take Care :).
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <h2 style="color:red; text-align: center;"> REFUND EMAIL</h2>
+        <div class="refund">
+            <p class="copyable-line" onclick="copyToClipboard(this)">
+                <span class="tooltip" style="color:white;">
+        Hello,
+        </br>
+        </br>I'm sorry to hear that your item [ITEM] did not arrive.
+        </br>I’ve requested a refund for £[amount]. This will go through within the next 5-7 business days and will appear as a credit on your billing statement.
+        </br>
+        </br>On the date the refund is completed, we'll send you an e-mail confirming the date, amount and payment details. After receiving this confirmation e-mail, you can view the refund details on the Order Summary in Your Account (https://www.amazon.co.uk/your-account). Completed refunds will appear at the bottom of an individual order summary page.
+        </br>
+        </br>I hope this helps.
+        </br>
+        </br> We look forward to seeing you again soon.
+
+        <span class="tooltiptext" id="tooltip2"></span>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <div id="notification" style="display:none; background-color: #da680a; color: white; padding: 10px; position: fixed; top: 10px; left: 10px; z-index: 1000;"></div>
+
+
+    <div class="not-pos">
+
+
+        <div class="notepad" style="background-color: rgba(0, 0, 0, 0.0);">
+            <div class="inputs">
+                <input type="text" id="break1" placeholder="B2" oninput="calculateBreak()">
+                <input type="text" id="break2" placeholder="L" oninput="calculateBreak()">
+                <input type="text" id="break3" placeholder="B3" oninput="calculateBreak()">
+                <input type="text" id="break4" placeholder="UNA" oninput="calculateBreak()">
+            </div>
+            <div class="labels">
+                <span style="color: white;">B2</span>
+                <span style="color: white;">L</span>
+                <span style="color: white;">B3</span>
+                <span style="color: white;">UNA</span>
+            </div>
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+
+    <!--================================================================================-->
+
+    <button class="dark-mode-switch" style="height: 35px; width: 35px;" onclick="toggleDarkMode0()"></button>
+
+    <button class="dark-mode-switch" style="top: 120px; height: 35px; width: 35px;    background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);" onclick="toggleDarkMode()"></button>
+
+
+    <button class="dark-mode-switch" style="top: 70px; background-color: #080e2c; height: 35px; width: 35px; border: 1px solid white;" onclick="toggleDarkMode2()"></button>
+
+
+    <div id="timer-container" style="text-align: center; padding: 10px; border: 0.1px solid #e8eee8; border-radius: 10px;">
+        <input type="number" id="time-input" style="width: 90px; display: inline-block; vertical-align: middle; padding: 5px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px;" value="120" min="0" />
+        <button id="set-timer" style="font-size: 12px; display: inline-block; vertical-align: middle; width: 70px; padding: 6px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Set Timer</button>
+        <iframe id="timer-frame" width="200" height="100" src="https://vclock.com/embed/timer/#countdown=00:02:00&date=2024-10-29T03:15:58&theme=1&ampm=1&sound=classic" frameborder="0" allowfullscreen style="margin-top: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></iframe>
+    </div>
+
+    <script>
+        function copyToClipboard(element) {
+            const copyText = element.innerText.trim();
+            const textarea = document.createElement('textarea');
+            textarea.value = copyText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const tooltip = element.querySelector(".tooltiptext");
+            tooltip.innerHTML = "Copied 😊";
+            tooltip.style.visibility = "visible";
+            setTimeout(function() {
+                tooltip.style.visibility = "hidden";
+            }, 1500);
+        }
+
+        document.getElementById('set-timer').addEventListener('click', function() {
+            // Get the value from the input field
+            const timeInSeconds = parseInt(document.getElementById('time-input').value, 10);
+
+            // Convert seconds to HH:MM:SS format
+            const hours = String(Math.floor(timeInSeconds / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((timeInSeconds % 3600) / 60)).padStart(2, '0');
+            const seconds = String(timeInSeconds % 60).padStart(2, '0');
+
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+            // Update the iframe src
+            const timerFrame = document.getElementById('timer-frame');
+            timerFrame.src = `https://vclock.com/embed/timer/#countdown=${formattedTime}&date=2024-10-29T03:15:58&theme=1&m=1&sound=classic`;
+        });
+
+        https: //vclock.com/embed/timer/#countdown=00:02:00&date=2024-10-29T03:15:58&theme=1&ampm=1&sound=xylophone
+
+            function updateName(event) {
+                if (event.key === 'Enter') {
+                    const nameInput = document.getElementById('name-input');
+                    const name = nameInput.value.trim();
+                    if (name) {
+                        document.getElementById('name-placeholder').textContent = name;
+                        nameInput.style.display = 'none'; // Hide input after setting name
+                    }
+                }
+            }
+
+        // Toggle dark mode
+        function toggleDarkMode0() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function toggleDarkMode2() {
+            document.body.classList.toggle('dark-mode2');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const popup = document.getElementById('color-picker-popup');
+            popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function applyCustomColors() {
+            const bgColor = document.getElementById('bg-color').value;
+            const textColor = document.getElementById('text-color').value;
+
+            if (/^#[0-9A-F]{6}$/i.test(bgColor)) {
+                document.body.style.backgroundColor = bgColor;
+            }
+            if (/^#[0-9A-F]{6}$/i.test(textColor)) {
+                document.body.style.color = textColor;
+            }
+
+            document.getElementById('color-picker-popup').style.display = 'none';
+        }
+
+
+        // window.addEventListener('beforeunload', function(e) {
+        //     // Custom message for the warning
+        //     var confirmationMessage = 'Break you entered will not be saved.';
+
+        //     // Standard way to set the message in modern browsers
+        //     e.returnValue = confirmationMessage;
+
+        //     // For older browsers
+        //     return confirmationMessage;
+        // });
+
+        // NOTEPAD
+        function calculateBreak() {
+            const break1 = Math.min(parseFloat(document.getElementById('break1').value) || 0, 60);
+            const break2 = Math.min(parseFloat(document.getElementById('break2').value) || 0, 60);
+            const break3 = Math.min(parseFloat(document.getElementById('break3').value) || 0, 60);
+            const break4 = Math.min(parseFloat(document.getElementById('break4').value) || 0, 60);
+
+            const totalBreak = break1 + break2 + break3;
+            const remainingBreak = 60 - totalBreak;
+
+            document.getElementById('result').innerHTML = `<span style="color: white;">Used Break: </span><span style="color: red; font-size: 24px;">${totalBreak.toFixed(2)}</span> <span style="color: white; font-size: 18px;">minutes</span><br><span style="color: white; font-size: 18px;">Remaining Break:</span> <span style="color: green; font-size: 24px;">${remainingBreak.toFixed(2)}</span> <span style="color: white; font-size: 18px;">minutes</span>`;
+        }
+        // NOTEPAD END
+
+        function formatDate(date) {
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            };
+            return date.toLocaleDateString('en-GB', options).replace(',', '');
+        }
+
+        function copyToClipboard2(resultId, buttonId) {
+            const textToCopy = document.getElementById(resultId).innerText;
+            const button = document.getElementById(buttonId);
+            if (textToCopy) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    button.innerText = 'Copied';
+                    button.classList.add('copied');
+
+                    setTimeout(() => {
+                        button.innerText = 'Copy';
+                        button.classList.remove('copied');
+                    }, 3000); // Reset after 3 seconds
+                });
+            }
+        }
+
+        function calculateDesired() {
+            const selectedDate = document.getElementById('datePicker').value;
+            if (!selectedDate) return;
+
+            const offset = parseInt(document.getElementById('desiredOffset').value, 10);
+            let date = new Date(selectedDate);
+            date.setDate(date.getDate() + offset);
+            document.getElementById('desiredDateResult').innerText = formatDate(date);
+        }
+
+        function calculateRD() {
+            const selectedDate = document.getElementById('datePicker').value;
+            if (!selectedDate) return;
+
+            const offset = parseInt(document.getElementById('dynamicOffset1').value, 10);
+            let date = new Date(selectedDate);
+            date.setDate(date.getDate() + offset + 1); // RD is 1 day later than the offset
+            document.getElementById('dynamicDateResult1').innerText = formatDate(date);
+        }
+
+        function calculatePDD() {
+            const selectedDate = document.getElementById('datePicker').value;
+            if (!selectedDate) return;
+
+            const offset = parseInt(document.getElementById('dynamicOffset2').value, 10);
+            let date = new Date(selectedDate);
+            date.setDate(date.getDate() + offset); // PDD remains the same
+            document.getElementById('dynamicDateResult2').innerText = formatDate(date);
+        }
+
+        let irdate1;
+
+        function calculateIR() {
+            const selectedDate = document.getElementById('datePicker').value;
+
+            // Check if no date is selected
+            if (!selectedDate) {
+                document.getElementById('irDateResult').innerText = ''; // Clear the result display
+                irdate1 = null; // Clear the stored date
+                document.getElementById('IRdateforline').innerText = 'DATE'; // Set tooltip text to "DATE"
+                return;
+            }
+
+            const offset = parseInt(document.getElementById('irOffset').value, 10);
+            let date = new Date(selectedDate);
+            date.setDate(date.getDate() + offset);
+            document.getElementById('irDateResult').innerText = formatDate(date);
+
+            irdate1 = date; // Store the calculated date
+            document.getElementById('IRdateforline').innerText = formatDate(irdate1); // Update the tooltip text
+        }
+
+
+        function showResults() {
+            const selectedDate = document.getElementById('datePicker').value;
+            if (!selectedDate) return;
+
+            let date = new Date(selectedDate);
+
+            // Set Desired + Offset
+            calculateDesired(); // Assuming you have this function
+
+            // Set Date + 30 Days
+            let datePlus30 = new Date(date);
+            datePlus30.setDate(date.getDate() + 30);
+            document.getElementById('plus30Result').innerText = formatDate(datePlus30);
+
+            // Set Date + 3 Days
+            let datePlus3 = new Date(date);
+            datePlus3.setDate(date.getDate() + 3);
+            document.getElementById('plus3Result').innerText = formatDate(datePlus3);
+
+            // Update the formatted date for the tooltip
+            document.getElementById('threeDaysDateResult').innerText = formatDate(datePlus3);
+
+            // Set Date + IR Offset (60 or 90)
+            calculateIR(); // Call this to ensure the date and tooltip are updated
+
+            // Update dynamic results
+            calculatePDD(); // Assuming you have this function
+            calculateRD(); // Assuming you have this function
+        }
+
+
+
+
+        function resetResults() {
+            document.getElementById('desiredDateResult').innerText = '';
+            document.getElementById('plus30Result').innerText = '';
+            document.getElementById('plus3Result').innerText = '';
+            document.getElementById('irDateResult').innerText = '';
+            document.getElementById('dynamicDateResult1').innerText = '';
+            document.getElementById('dynamicDateResult2').innerText = '';
+            document.getElementById('datePicker').value = '';
+            document.getElementById('desiredOffset').value = 0;
+        }
+
+
+        dragElement(document.getElementById("mydiv"));
+
+        function dragElement(elmnt) {
+            var pos1 = 0,
+                pos2 = 0,
+                pos3 = 0,
+                pos4 = 0;
+            if (document.getElementById(elmnt.id + "header")) {
+                /* if present, the header is where you move the DIV from:*/
+                document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+            } else {
+                /* otherwise, move the DIV from anywhere inside the DIV:*/
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                /* stop moving when mouse button is released:*/
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+
+        function togglePanel() {
+            const sidePanel = document.getElementById('sidePanel69');
+            const toggleButton = document.getElementById('toggleButton69');
+            sidePanel.classList.toggle('open');
+            toggleButton.classList.toggle('open');
+        }
+
+        function showInputField() {
+            const inputLine = document.getElementById('inputLine69');
+            inputLine.style.display = 'flex'; // Show the input field as flex container
+        }
+
+        function addLine() {
+            const titleInput = document.getElementById('titleInput69').value;
+            const customTextInput = document.getElementById('customTextInput69').value;
+
+            if (titleInput.trim() === "" || customTextInput.trim() === "") {
+                alert("Please fill out both fields.");
+                return;
+            }
+
+            const chatContent = document.getElementById('chatContent69');
+
+            // Create line container
+            const lineContainer = document.createElement('div');
+            lineContainer.className = 'line-container69';
+
+            // Create title
+            const title = document.createElement('h4');
+            title.innerText = titleInput;
+            lineContainer.appendChild(title);
+
+            // Create line
+            const newLine = document.createElement('div');
+            newLine.className = 'copyable-line69 tooltip69';
+            newLine.innerText = customTextInput;
+
+            // Create tooltip
+            const tooltipText = document.createElement('span');
+            tooltipText.className = 'tooltiptext69';
+            tooltipText.innerText = "Copy to clipboard";
+            newLine.appendChild(tooltipText);
+
+            newLine.onclick = function() {
+                navigator.clipboard.writeText(customTextInput);
+                showNotification("Text copied to clipboard!");
+            };
+
+            function showNotification(message) {
+                const notification = document.getElementById("notification");
+                notification.textContent = message;
+                notification.style.display = "block";
+
+                // Hide the notification after 2 seconds
+                setTimeout(() => {
+                    notification.style.display = "none";
+                }, 2000);
+            }
+
+
+            lineContainer.appendChild(newLine);
+            chatContent.appendChild(lineContainer);
+
+            // Reset input fields
+            document.getElementById('titleInput69').value = '';
+            document.getElementById('customTextInput69').value = '';
+            document.getElementById('inputLine69').style.display = 'none'; // Hide input field after submission
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const sidePanel = document.getElementById('sidePanel69');
+            const chatContent = document.getElementById('chatContent69');
+
+            body.classList.toggle('dark-mode');
+            sidePanel.classList.toggle('dark-mode');
+            chatContent.classList.toggle('dark-mode');
+
+            const copyableLines = document.querySelectorAll('.copyable-line69');
+            copyableLines.forEach(line => line.classList.toggle('dark-mode'));
+        }
+    </script>
+</body>
+
+</html>
