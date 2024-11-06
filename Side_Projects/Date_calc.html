@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #0f0f0f;
+        }
+
+        #mydiv {
+            position: absolute;
+            z-index: 9;
+            background-color: #f1f1f1;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        #mydivheader {
+            padding: 10px;
+            cursor: move;
+            z-index: 10;
+            background-color: #2196F3;
+            color: #fff;
+            border-radius: 8px;
+            margin: 1px;
+        }
+
+        .date-container {
+            width: 410px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #131111;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ccc;
+            
+            resize: both;
+            overflow: auto;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            margin-top: 0px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input[type="date"], input[type="number"] {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        td {
+            background-color: #fafafa;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 132px;
+        }
+
+        button {
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.copied {
+            background-color: #28a745;
+        }
+
+        #resultArea {
+            margin-top: 10px;
+        }
+
+        #resultArea button {
+            width: 100%;
+            background-color: #dc3545;
+        }
+
+        #resultArea button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+<div id="mydiv">
+    <div id="mydivheader">Click here to move</div>    
+    <div class="date-container">
+        <h1 style="color: white;">Date Calculator</h1>
+        
+        <label for="datePicker" style="color: white;">Select Date:</label>
+        <input type="date" id="datePicker" onchange="showResults()"><br><br>
+
+        <table>
+            <tr>
+                <th>Result Type</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[IRD]</span> Today's Date</td>
+                <td id="todayResult"></td>
+                <td><button id="todayBtn" onclick="copyToClipboard('todayResult', 'todayBtn')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[IRD]</span> Date + 30</td>
+                <td id="plus30Result"></td>
+                <td><button id="plus30Btn" onclick="copyToClipboard('plus30Result', 'plus30Btn')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[3DI]</span> <span style="font-weight: bold;">Date + 3</span></td>
+                <td id="plus3Result"></td>
+                <td><button id="plus3Btn" onclick="copyToClipboard('plus3Result', 'plus3Btn')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[IR]</span> Date + 
+                    <select id="irOffset" onchange="calculateIR()" style="font-weight: bold; font-size: 20px;">
+                        <option value="60" selected>60</option>
+                        <option value="90">90</option>
+                    </select>
+                </td>
+                <td id="irResult"></td>
+                <td><button id="irBtn" onclick="copyToClipboard('irResult', 'irBtn')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[RD]</span> + 
+                    <select id="dynamicOffset1" onchange="calculateRD()" style="font-weight: bold; font-size: 20px;">
+                        <option value="7">7</option>
+                        <option value="14" selected>14</option>
+                        <option value="30">30</option>
+                        <option value="60">60</option>
+                    </select>
+                </td>
+                <td id="dynamicDateResult1"></td>
+                <td><button id="dynamicDateBtn1" onclick="copyToClipboard('dynamicDateResult1', 'dynamicDateBtn1')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[PDD]</span> + 
+                    <select id="dynamicOffset2" onchange="calculatePDD()" style="font-weight: bold; font-size: 20px;">
+                        <option value="14" selected>14</option>
+                        <option value="30">30</option>
+                        <option value="90">90</option>
+                    </select>
+                </td>
+                <td id="dynamicDateResult2"></td>
+                <td><button id="dynamicDateBtn2" onclick="copyToClipboard('dynamicDateResult2', 'dynamicDateBtn2')">Copy</button></td>
+            </tr>
+            <tr>
+                <td><span style="color:orangered;font-weight:bold;">[Custom Offset]</span> + 
+                    <input type="number" id="customOffset" value="0" onchange="calculateCustom()" style="font-weight: bold; font-size: 20px; width: 60px;">
+                </td>
+                <td id="customResult"></td>
+                <td><button id="customBtn" onclick="copyToClipboard('customResult', 'customBtn')">Copy</button></td>
+            </tr>
+        </table>
+
+        <div id="resultArea">
+            <button onclick="resetResults()">Reset</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function formatDate(date) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-GB', options).replace(',', '');
+    }
+
+    function copyToClipboard(resultId, buttonId) {
+        const textToCopy = document.getElementById(resultId).innerText;
+        const button = document.getElementById(buttonId);
+        if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.innerText = 'Copied';
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.innerText = 'Copy';
+                    button.classList.remove('copied');
+                }, 3000);
+            });
+        }
+    }
+
+    function calculateRD() {
+        const selectedDate = document.getElementById('datePicker').value;
+        if (!selectedDate) return;
+
+        const offset = parseInt(document.getElementById('dynamicOffset1').value, 10);
+        let date = new Date(selectedDate);
+        date.setDate(date.getDate() + offset + 1);
+        document.getElementById('dynamicDateResult1').innerText = formatDate(date);
+    }
+
+    function calculatePDD() {
+        const selectedDate = document.getElementById('datePicker').value;
+        if (!selectedDate) return;
+
+        const offset = parseInt(document.getElementById('dynamicOffset2').value, 10);
+        let date = new Date(selectedDate);
+        date.setDate(date.getDate() + offset);
+        document.getElementById('dynamicDateResult2').innerText = formatDate(date);
+    }
+
+    function calculateIR() {
+        const selectedDate = document.getElementById('datePicker').value;
+        if (!selectedDate) return;
+
+        const offset = parseInt(document.getElementById('irOffset').value, 10);
+        let date = new Date(selectedDate);
+        date.setDate(date.getDate() + offset);
+        document.getElementById('irResult').innerText = formatDate(date);
+    }
+
+    function calculateCustom() {
+        const selectedDate = document.getElementById('datePicker').value;
+        if (!selectedDate) return;
+
+        const offset = parseInt(document.getElementById('customOffset').value, 10);
+        let date = new Date(selectedDate);
+        date.setDate(date.getDate() + offset);
+        document.getElementById('customResult').innerText = formatDate(date);
+    }
+
+    function showResults() {
+        const selectedDate = document.getElementById('datePicker').value;
+        if (!selectedDate) return;
+
+        const today = new Date();
+        document.getElementById('todayResult').innerText = formatDate(today);
+
+        const date = new Date(selectedDate);
+
+        let datePlus30 = new Date(date);
+        datePlus30.setDate(date.getDate() + 30);
+        document.getElementById('plus30Result').innerText = formatDate(datePlus30);
+
+        let datePlus3 = new Date(date);
+        datePlus3.setDate(date.getDate() + 3);
+        document.getElementById('plus3Result').innerText = formatDate(datePlus3);
+
+        calculateIR();
+        calculateRD();
+        calculatePDD();
+        calculateCustom();
+    }
+
+    function resetResults() {
+        document.getElementById('datePicker').value = '';
+        document.querySelectorAll('td[id$="Result"]').forEach(cell => cell.innerText = '');
+    }
+</script>
+
+</body>
+</html>
