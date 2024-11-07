@@ -31,12 +31,13 @@ let charCheckWrong = false
 
 const words = [
   
-    "jude fired juice free jerk ride feud kid urge ride fuel deer ire jerk kid fierce feud juice ire juice free deer ride urge fury kid free ride fierce urge kid feud free fuel ride urge kid ire juice fuel fierce ire deer ride kid free ride fierce urge fury ride feud ire fuel free ride juice deer fire feud ride fierce deer",
-    "free ride deer juice jerk ire urge deer fuel fire kid ire ride fury fuel ire free jerk kid deer fire ire juice feud ire fury free deer ire feud juice kid ride feud ride deer ire fury juice ride ire kid free fury ride fuel ire fierce juice ire fuel free ride juice kid ire ride feud ire kid fierce deer ire free juice",
-    "jerk kid ire feud juice ire deer free ire ride juice deer ire ride juice kid ire juice ire deer fury ire ride kid deer ire jerk ride ire free feud ire kid feud ire deer juice ire feud ire deer fire ride ire juice kid ire free ire jerk juice ire fuel ire deer ire fire ire feud ire ride ire juice ire fuel ire deer",
-    "free ride ire deer juice ire fuel ire kid ire ride ire free ire juice ire jerk ire deer ire juice ire free ire ride ire deer ire fuel ire juice ire deer ire free ire fuel ire jerk ire fuel ire free ire deer ire juice ire free ire fuel ire ride ire deer ire jerk ire juice ire free ire fuel ire juice ire ride ire",
-    "i  re juice ire fuel ire deer ire free ire juice ire deer ire ride ire fuel ire deer ire juice ire free ire fuel ire deer ire juice ire fuel ire ride ire deer ire juice ire free ire ride ire deer ire juice ire free ire fuel ire juice ire ride ire free ire juice ire ride ire juice ire free ire juice ire fuel ire ride"
-  
+    "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride",
+    "fuel ire kid ire feud ire deer ire juie ire ride ire kid ire free ire feud ire ride free ire kid ire feud ire ride free ire kid ire juie ire deer ire fury ire feud ire kid ire free ire juie ire kid ire feud ire ride ire fuel ire kid ire juie ire ride ire feud ire fuel ire kid ire ride ire free ire ride",
+    "deer ire juie ire ride ire kid ire free ire fuel ire kid ire juie ire ride ire deer ire fuel ire kid ire ride ire juie ire kid ire feud ire ride ire kid ire deer ire juie ire kid ire ride ire fury ire ride ire deer ire juie ire fuel ire ride ire juie ire kid ire fuel ire juie ire kid ire ride ire",
+    "ire kid ire ride ire free ire deer ire juie ire fuel ire ride ire kid ire ride ire feud ire ride ire free ire kid ire juie ire ride ire kid ire juie ire ride ire free ire feud ire kid ire juie ire kid ire feud ire juie ire ride ire free ire fuel ire deer ire kid ire juie ire fuel ire ride ire",
+    "free ire kid ire juie ire ride ire fuel ire kid ire juie ire free ire feud ire juie ire ride ire kid ire free ire juie ire fuel ire ride ire free ire kid ire juie ire ride ire deer ire fuel ire juie ire free ire feud ire kid ire juie ire fuel ire ride ire kid ire juie ire ride ire feud ire free",
+    "fed red deer if fed fed juri fed deer if keir fed red deer if ike fed red deer fed juri keir fed fed red deer if fed juri ike fed fed red deer if fed keir fed deer fed fed fed ike fed fed ike fed fed ike fed ike fed fed red deer ike fed fed fed red fed red ike fed deer fed fed fed red deer fed ike fed deer fed ike fed ike fed fed"
+
 ]
 
 function again() {

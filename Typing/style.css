@@ -13,12 +13,12 @@
   
   
   #main-container {
-    background-color: rgb(79, 69, 87);
-    min-height: 100px;
-    min-width: 50vw;
-    max-height: 60vh;
-    height: fit-content;
-    width: 80vw;
+    background-color: rgb(0, 0, 0);
+    /* min-height: 100px; */
+    /* min-width: 50vw; */
+    /* max-height: 60vh; */
+    height: 190px;
+    width: 90%;
   
     padding: 5px;
     align-self:center;
@@ -35,15 +35,17 @@
   #paragraph-box {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
-    margin: 2.5px;
+    /* margin: 2.5px; */
     min-height: 4rem;
     border-radius: 0.5rem;
     text-align: left;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
+    padding: 3rem;
+    /* margin-bottom: 0.5rem; */
+    /* margin-top: 0.5rem; */
     line-height: 2rem;
     min-width: 2rem;
-    width: fill;
+    font-size: 50px;
+    /* width: fill; */
     font-family: 'JetBrains Mono', monospace; 
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -94,18 +96,18 @@
     justify-items: center;
     margin: auto;
     margin-top: 20px;
-    background-color: rgb(79, 69, 87);
+    background-color: rgb(86, 86, 92);
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 10px;
   }
   
   #accuracy, #time, #wpm {
-    background-color: rgb(109, 93, 110);
+    background-color: rgb(188, 206, 197);
     width: 100%; 
     margin: 10px;
     border-radius: 5px;
-    color: rgb(244, 238, 224);
+    color: rgb(3, 3, 3);
     padding: 5px;
     font-family: JetBrains Mono;
     font-weight: bold;
@@ -132,7 +134,7 @@
   }
   
   .correct {
-    color: rgb(244, 238, 224);
+    color: rgb(72, 6, 255);
   }
   
   .background-fix {
