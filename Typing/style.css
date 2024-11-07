@@ -158,3 +158,16 @@
     background-color: red;
     color: green;
   }
+
+  #add-line-bttn {
+    width: 120px;
+    height: 50px;
+    color: rgba(244, 238, 224);
+    position: relative;
+    margin: 10px;
+    border: none;
+    background-color: rgb(79, 69, 87);
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(244, 238, 224, 0.4);
+  }
+  

@@ -31,12 +31,7 @@ let charCheckWrong = false
 
 const words = [
   
-    "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride",
-    "fuel ire kid ire feud ire deer ire juie ire ride ire kid ire free ire feud ire ride free ire kid ire feud ire ride free ire kid ire juie ire deer ire fury ire feud ire kid ire free ire juie ire kid ire feud ire ride ire fuel ire kid ire juie ire ride ire feud ire fuel ire kid ire ride ire free ire ride",
-    "deer ire juie ire ride ire kid ire free ire fuel ire kid ire juie ire ride ire deer ire fuel ire kid ire ride ire juie ire kid ire feud ire ride ire kid ire deer ire juie ire kid ire ride ire fury ire ride ire deer ire juie ire fuel ire ride ire juie ire kid ire fuel ire juie ire kid ire ride ire",
-    "ire kid ire ride ire free ire deer ire juie ire fuel ire ride ire kid ire ride ire feud ire ride ire free ire kid ire juie ire ride ire kid ire juie ire ride ire free ire feud ire kid ire juie ire kid ire feud ire juie ire ride ire free ire fuel ire deer ire kid ire juie ire fuel ire ride ire",
-    "free ire kid ire juie ire ride ire fuel ire kid ire juie ire free ire feud ire juie ire ride ire kid ire free ire juie ire fuel ire ride ire free ire kid ire juie ire ride ire deer ire fuel ire juie ire free ire feud ire kid ire juie ire fuel ire ride ire kid ire juie ire ride ire feud ire free",
-    "fed red deer if fed fed juri fed deer if keir fed red deer if ike fed red deer fed juri keir fed fed red deer if fed juri ike fed fed red deer if fed keir fed deer fed fed fed ike fed fed ike fed fed ike fed ike fed fed red deer ike fed fed fed red fed red ike fed deer fed fed fed red deer fed ike fed deer fed ike fed ike fed fed"
+    "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride"
 
 ]
 
@@ -200,6 +195,21 @@ function ignored_Key(e_key) {
   }
   return ignore_keys[e_key] ?? -1
 }
+
+function addLine() {
+  // Prompt the user to input a new line
+  const newLine = prompt("Enter the new line of text:");
+
+  // Check if the input is not empty
+  if (newLine) {
+    // Add the new line to the words array
+    words.push(newLine);
+
+    // Optionally, you could call the `init()` function here to start with the new line
+    init();
+  }
+}
+
 
 inputArea.addEventListener('keydown', (e) => {
   let name = e.key

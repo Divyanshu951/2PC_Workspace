@@ -13,13 +13,13 @@
       box-sizing: border-box;
       background-color: rgb(255, 255, 255);
     }
-    
+
     body {
       background-color: rgb(57, 54, 70);
       text-align: center;
       font-size: x-large;
     }
-    
+
     #main-container {
       background-color: rgb(0, 0, 0);
       height: 190px;
@@ -34,7 +34,7 @@
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 2rem;
     }
-    
+
     #paragraph-box {
       background-color: rgb(255, 255, 255);
       color: rgb(0, 0, 0);
@@ -43,16 +43,17 @@
       text-align: left;
       padding: 3rem;
       line-height: 2rem;
+      min-width: 2rem;
       font-size: 50px;
       font-family: 'JetBrains Mono', monospace;
       overflow-y: scroll;
       scroll-behavior: smooth;
     }
-    
+
     #input-box {
       overflow-y: auto;
     }
-    
+
     #input-field {
       font-family: 'Courier New', Courier, monospace;
       color: rgb(79, 69, 87);
@@ -62,7 +63,7 @@
       height: 0;
       width: 100%;
     }
-    
+
     #start-bttn {
       width: 100px;
       height: 50px;
@@ -74,7 +75,7 @@
       border-radius: 10px;
       box-shadow: 0 1px 1px rgba(244, 238, 224, 0.4);
     }
-    
+
     #stats-container {
       width: fit-content;
       height: 200px;
@@ -92,10 +93,8 @@
       padding-right: 10px;
       border-radius: 10px;
     }
-    
-    #accuracy,
-    #time,
-    #wpm {
+
+    #accuracy, #time, #wpm {
       background-color: rgb(188, 206, 197);
       width: 100%;
       margin: 10px;
@@ -105,54 +104,52 @@
       font-family: JetBrains Mono;
       font-weight: bold;
     }
-    
-    #wpm_con,
-    #time_con {
+
+    #wpm_con, #time_con {
       height: 85%;
       padding: 20px;
       font-size: 5rem;
     }
-    
+
     #acc_con {
       height: 85%;
       padding: 20px;
       font-size: 5rem;
     }
-    
+
     #small-sec {
       font-size: 0.7rem;
     }
-    
+
     .wrong {
       background-color: Red;
     }
-    
+
     .correct {
       color: rgb(72, 6, 255);
     }
-    
+
     .background-fix {
       background-color: rgb(109, 93, 110);
     }
-    
+
     .cursor-highlight {
       background-color: rgb(0, 0, 0);
       color: white;
     }
-    
+
     .space-wrong {
       background-color: Red;
     }
-    
+
     .hidden {
       visibility: hidden;
     }
-    
+
     .broken {
       background-color: red;
       color: green;
     }
-    
   </style>
 </head>
 
@@ -161,7 +158,8 @@
     <section id="main-container">
       <div id="paragraph-box" onclick="focus_now()"></div>
       <input type="text" id="input-field" oninput='check()'>
-      <div id="input-box"></div>
+      <div id="input-box">
+      </div>
     </section>
     <button id="start-bttn" onclick="again()">Start</button>
     <section id="stats-container">
@@ -178,34 +176,37 @@
   </main>
 
   <script>
-    const bttn = document.querySelector('#test-click')
-    const inputArea = document.querySelector('#input-field')
-    const paragraphBox = document.querySelector("#paragraph-box")
-    const startBttn = document.querySelector('#start-bttn')
-    const wpm_container = document.querySelector('#wpm_con')
-    const time_container = document.querySelector('#time_con')
-    const accuracy_container = document.querySelector('#acc_con')
-    
-    let index_no = 0
-    let mainArray = []
-    let spanArray = []
-    let modArray = []
-    let typedChar
-    let r_time = 0
-    let curr_input = ''
-    let middle_char = 30
-    let scroll_amnt = 10
-    let curr_input_array = []
-    let latest_arr_count = 0
-    let char_typedCount = 0
-    let char_typedWrong = 0
-    let char_typedCorrect = 0
-    let timer
-    let count = 0
-    let array_count = 0
-    let typedChar_arr = []
-    let charCheckWrong = false
-    
+    const bttn = document.querySelector('#test-click');
+    const inputArea = document.querySelector('#input-field');
+    const paragraphBox = document.querySelector("#paragraph-box");
+    const startBttn = document.querySelector('#start-bttn');
+    const wpm_container = document.querySelector('#wpm_con');
+    const time_container = document.querySelector('#time_con');
+    const accuracy_container = document.querySelector('#acc_con');
+
+    let index_no = 0;
+    let mainArray = [];
+    let spanArray = [];
+    let modArray = [];
+    let typedChar;
+    let r_time = 0;
+    let curr_input = '';
+    let middle_char = 30;
+    let scroll_amnt = 10;
+    let curr_input_array = [];
+    let latest_arr_count = 0;
+
+    let char_typedCount = 0;
+    let char_typedWrong = 0;
+    let char_typedCorrect = 0;
+
+    let timer;
+    let count = 0;
+    let array_count = 0;
+
+    let typedChar_arr = [];
+    let charCheckWrong = false;
+
     const words = [
       "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride",
       "fuel ire kid ire feud ire deer ire juie ire ride ire kid ire free ire feud ire ride free ire kid ire feud ire ride free ire kid ire juie ire deer ire fury ire feud ire kid ire free ire juie ire kid ire feud ire ride ire fuel ire kid ire juie ire ride ire feud ire fuel ire kid ire ride ire free ire ride",
@@ -213,62 +214,92 @@
       "ire kid ire ride ire free ire deer ire juie ire fuel ire ride ire kid ire ride ire feud ire ride ire free ire kid ire juie ire ride ire kid ire juie ire ride ire free ire feud ire kid ire juie ire kid ire feud ire juie ire ride ire free ire fuel ire deer ire kid ire juie ire fuel ire ride ire",
       "free ire kid ire juie ire ride ire fuel ire kid ire juie ire free ire feud ire juie ire ride ire kid ire free ire juie ire fuel ire ride ire free ire kid ire juie ire ride ire deer ire fuel ire juie ire free ire feud ire kid ire juie ire fuel ire ride ire kid ire juie ire ride ire feud ire free",
       "fed red deer if fed fed juri fed deer if keir fed red deer if ike fed red deer fed juri keir fed fed red deer if fed juri ike fed fed red deer if fed keir fed deer fed fed fed ike fed fed ike fed fed ike fed ike fed fed red deer ike fed fed fed red fed red ike fed deer fed fed fed red deer fed ike fed deer fed ike fed ike fed fed"
-    ]
-    
+    ];
+
     function again() {
-      resetVal()
-      inputArea.focus()
-      startBttn.innerHTML = 'Again'
-      init()
-      check()
-      time_counter()
+      resetVal();
+      inputArea.focus();
+      startBttn.innerHTML = 'Again';
+      init();
+      check();
+      time_counter();
     }
-    
+
     function resetVal() {
       paragraphBox.scrollLeft = 0;
-      clearInterval(timer)
-      inputArea.value = ''
+      clearInterval(timer);
+      inputArea.value = '';
       latest_arr_count = 0;
-      time_container.innerText = '0'
-      wpm_container.innerText = ''
-      accuracy_container.innerText = ''
-      char_typedWrong = 0
-      count = 0
-      charCheckWrong = false
-      array_count = 0
-      typedChar_arr = []
+      time_container.innerText = '0';
+      wpm_container.innerText = '';
+      accuracy_container.innerText = '';
+      char_typedWrong = 0;
+      count = 0;
+      charCheckWrong = false;
+      array_count = 0;
+      typedChar_arr = [];
     }
-    
+
     function focus_now() {
-      inputArea.focus()
+      inputArea.focus();
     }
-    
-    function start() {
-      init()
-    }
-    
-    function init() {
-      modArray = [...words[0]]
-      modArray.forEach(el => {
-        let sp = document.createElement('span')
-        sp.innerText = el
-        spanArray.push(sp)
-        paragraphBox.append(sp)
-      })
-    }
-    
+
     function time_counter() {
       timer = setInterval(() => {
-        time_container.innerText = count
-        count++
-      }, 1000)
+        count++;
+        time_container.innerText = count;
+      }, 1000);
     }
-    
-    function check() {
-      if (charCheckWrong === false) {
-        typedChar = inputArea.value.charAt(inputArea.value.length - 1)
-        char_typedCount = inputArea.value.length
+
+    function init() {
+      let arr_count = 0;
+      let i = 0;
+      while (i < words.length) {
+        mainArray.push(words[i]);
+        i++;
       }
+      arrange_mainArray();
+    }
+
+    function arrange_mainArray() {
+      let spanCount = 0;
+      let paragraph = '';
+      for (let i = 0; i < mainArray.length; i++) {
+        spanArray.push('<span class="background-fix">' + mainArray[i] + '</span>');
+      }
+      paragraphBox.innerHTML = spanArray.join(' ');
+      scrollPara();
+    }
+
+    function scrollPara() {
+      paragraphBox.scrollTop = paragraphBox.scrollHeight;
+    }
+
+    function check() {
+      typedChar = inputArea.value;
+      if (typedChar !== curr_input) {
+        compareStr();
+      }
+    }
+
+    function compareStr() {
+      let str = typedChar;
+      let incorrect_charCount = 0;
+      for (let i = 0; i < str.length; i++) {
+        let current_char = str[i];
+        if (current_char === spanArray[index_no].charAt(i)) {
+          char_typedCorrect++;
+        } else {
+          char_typedWrong++;
+        }
+        char_typedCount++;
+      }
+      wpm_calculator();
+    }
+
+    function wpm_calculator() {
+      wpm_container.innerText = char_typedCount / (count / 60);
+      accuracy_container.innerText = (char_typedCorrect / char_typedCount) * 100;
     }
   </script>
 </body>
