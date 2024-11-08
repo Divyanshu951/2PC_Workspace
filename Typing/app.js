@@ -11,7 +11,6 @@ let mainArray = []
 let spanArray = []
 let modArray = []
 let typedChar
-let r_time = 0
 let curr_input = ''
 let middle_char = 30
 let scroll_amnt = 10
@@ -23,16 +22,14 @@ let char_typedWrong = 0
 let char_typedCorrect = 0
 
 let timer
-let count = 0
+let count = 120  // Set initial timer value to 120 seconds
 let array_count = 0
 
 let typedChar_arr = []
 let charCheckWrong = false
 
 const words = [
-  
     "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride"
-
 ]
 
 function again() {
@@ -49,11 +46,11 @@ function resetVal() {
   clearInterval(timer)
   inputArea.value = ''
   latest_arr_count = 0;
-  time_container.innerText = '0'
+  time_container.innerText = '120'
   wpm_container.innerText = ''
   accuracy_container.innerText = ''
   char_typedWrong = 0
-  count = 0
+  count = 120  // Reset count to 120
   charCheckWrong = false
   array_count = 0
   typedChar_arr = []
@@ -123,7 +120,7 @@ function check() {
       char.classList.remove('wrong')
       char.classList.add('correct')
       charCheckWrong = false
-    } else if (typedChar != char.innerHTML) {                                     //If the char does not match
+    } else if (typedChar != char.innerHTML) {    //If the char does not match
       char.classList.remove('correct')
       char.classList.add('wrong')
       charCheckWrong = true
@@ -139,21 +136,16 @@ function check() {
 
     // Adjust scrolling to center the current typed character
     if (index === curr_input_array.length - 1) {
-      const charWidth = char.offsetWidth; // Get the width of the current character
-      const charLeft = char.offsetLeft;  // Get the left position of the character
-      const boxWidth = paragraphBox.offsetWidth; // Get the width of the paragraph box
-      const scrollOffset = charLeft + charWidth / 2 - boxWidth / 2; // Calculate scroll position to center the character
-      paragraphBox.scrollLeft = Math.max(0, scrollOffset);
+      const charWidth = char.offsetWidth
+      const charLeft = char.offsetLeft
+      const boxWidth = paragraphBox.offsetWidth
+      const scrollOffset = charLeft + charWidth / 2 - boxWidth / 2
+      paragraphBox.scrollLeft = Math.max(0, scrollOffset)
     }
 
     if (curr_input_array.length == spanArray.length) {
       clearInterval(timer)
-      char_typedWrong = determine_wrong_counts()
-
-      console.log(char_typedWrong, "= wrong counts")
-      calculate_wpm()
-      calculate_acc()
-      startBttn.focus()
+      displayResults()
     }
   })
 
@@ -166,14 +158,21 @@ function calculate_acc() {
 }
 
 function time_counter() {
+  time_container.innerText = count;
+
   timer = setInterval(() => {
-    count++
-    time_container.innerText = count
-  }, 1002)
+    count--;
+    time_container.innerText = count;
+
+    if (count <= 0) { // Check if timer has reached 0
+      clearInterval(timer);
+      displayResults();
+    }
+  }, 1000) // Update every second
 }
 
 function calculate_wpm() {
-  let wpm_score = Math.round(((spanArray.length) / 5) / (count / 60))
+  let wpm_score = Math.round(((spanArray.length) / 5) / ((120 - count) / 60))
   wpm_container.innerText = wpm_score
 }
 
@@ -187,6 +186,14 @@ function determine_wrong_counts() {
   return typedWrong
 }
 
+function displayResults() {
+  char_typedWrong = determine_wrong_counts()
+  console.log(char_typedWrong, "= wrong counts")
+  calculate_wpm()
+  calculate_acc()
+  startBttn.focus()
+}
+
 function ignored_Key(e_key) {
   const ignore_keys = {
     'Shift': 0,
@@ -197,19 +204,12 @@ function ignored_Key(e_key) {
 }
 
 function addLine() {
-  // Prompt the user to input a new line
-  const newLine = prompt("Enter the new line of text:");
-
-  // Check if the input is not empty
+  const newLine = prompt("Enter the new line of text:")
   if (newLine) {
-    // Add the new line to the words array
-    words.push(newLine);
-
-    // Optionally, you could call the `init()` function here to start with the new line
-    init();
+    words.push(newLine)
+    init()
   }
 }
-
 
 inputArea.addEventListener('keydown', (e) => {
   let name = e.key
