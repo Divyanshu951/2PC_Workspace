@@ -1,173 +1,123 @@
+/* Reset and base styles */
 * {
-    margin: 0;
-    box-sizing: border-box;
-    background-color: rgb(255, 255, 255);
-  
-  }
-  
-  body {
-    background-color: rgb(57, 54, 70);
-    text-align: center;
-    font-size: x-large;
-  }
-  
-  
-  #main-container {
-    background-color: rgb(0, 0, 0);
-    /* min-height: 100px; */
-    /* min-width: 50vw; */
-    /* max-height: 60vh; */
-    height: 190px;
-    width: 90%;
-  
-    padding: 5px;
-    align-self:center;
-    border-radius: 0.7rem;
-    position: relative;
-    margin: auto;
-    margin-top: 100px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2rem;
-  
-  } 
-  
-  #paragraph-box {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    /* margin: 2.5px; */
-    min-height: 4rem;
-    border-radius: 0.5rem;
-    text-align: left;
-    padding: 3rem;
-    /* margin-bottom: 0.5rem; */
-    /* margin-top: 0.5rem; */
-    line-height: 2rem;
-    min-width: 2rem;
-    font-size: 50px;
-    /* width: fill; */
-    font-family: 'JetBrains Mono', monospace; 
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-  }
-  
-  #input-box {
-    /* border: 1px rgb(244, 238, 224) solid; */
-    overflow-y: auto;
-    /* height: 9rem; */
-  
-  }
-  
-  #input-field {
-    font-family: 'Courier New', Courier, monospace;
-    /* font-size: x-large; */
-    color: rgb(79, 69, 87);
-    background: none;   
-    outline: none;
-    border: none;
-    height: 0;
-    width: 100%;
-    /*--debug purposes--*/ 
-    /* border: 1px red solid; */
-  }
-  
-  #start-bttn{
-    width: 100px;
-    height: 50px; 
-    color: rgba(244, 238, 224);
-    position: relative;
-    margin: 10px; 
-    border: none;
-    background-color: rgb(79, 69, 87);
-    border-radius: 10px;
-    box-shadow:0 1px 1px rgba(244, 238, 224, 0.4);
-  }
-  
-  #stats-container {
-    /* width: 620px; */
-    width: fit-content;
-    height: 200px;
-    display: grid;
-    grid-template-columns:repeat(3, 1fr); 
-    grid-template-rows: 200px;
-    column-gap: 30px;
-    text-align: center;
-    align-self: center;
-    justify-items: center;
-    margin: auto;
-    margin-top: 20px;
-    background-color: rgb(86, 86, 92);
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-  }
-  
-  #accuracy, #time, #wpm {
-    background-color: rgb(188, 206, 197);
-    width: 100%; 
-    margin: 10px;
-    border-radius: 5px;
-    color: rgb(3, 3, 3);
-    padding: 5px;
-    font-family: JetBrains Mono;
-    font-weight: bold;
-  }
-  
-  #wpm_con, #time_con {
-    height: 85%;
-    padding: 20px; 
-    font-size: 5rem; 
-  }
-  
-  #acc_con {
-    height: 85%;
-    padding: 20px;
-    font-size: 5rem;
-  }
-  
-  #small-sec {
-    font-size: 0.7rem;
-  }
-  
-  .wrong {
-    background-color: Red;
-  }
-  
-  .correct {
-    color: rgb(72, 6, 255);
-  }
-  
-  .background-fix {
-    background-color: rgb(109, 93, 110);
-  }
-  
-  .cursor-highlight {
-    background-color: rgb(0, 0, 0);
-    color: white;
-  }
-  
-  .space-wrong{
-    background-color: Red;
-  }
-  
-  .hidden {
-    visibility: hidden;
-  }
-  
-  .broken {
-    background-color: red;
-    color: green;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  #add-line-bttn {
-    width: 120px;
-    height: 50px;
-    color: rgba(244, 238, 224);
-    position: relative;
-    margin: 10px;
-    border: none;
-    background-color: rgb(79, 69, 87);
-    border-radius: 10px;
-    box-shadow: 0 1px 1px rgba(244, 238, 224, 0.4);
+body {
+  background-color: #1e1e2e;
+  color: #eaeaea;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-size: 18px;
+}
+
+main {
+  width: 100%;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* Typing area and input box */
+#main-container {
+  background-color: #2e2e3a; 
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+#paragraph-box {
+  color: #C4A7E7;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.7em;
+  line-height: 1.5;
+  text-align: center;
+  word-wrap: break-word; /* Ensures words wrap to the next line */
+  width: 80%; /* Control the width to match the container */
+  margin: 0 auto; /* Center the text box */
+  white-space: normal; /* Allow wrapping */
+}
+
+
+#input-field {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #eaeaea;
+  background: none;
+  outline: none;
+  border: none;
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Button styling */
+#start-bttn, #add-line-bttn {
+  width: 120px;
+  height: 50px;
+  color: #eaeaea;
+  background-color: #4a4a62;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+#start-bttn:hover, #add-line-bttn:hover {
+  background-color: #6a6a82;
+}
+
+/* Stats section */
+#stats-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #2e2e3a;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+#accuracy, #time, #wpm {
+  color: #eaeaea;
+  width: 100px;
+  text-align: center;
+}
+
+#time_con, #acc_con, #wpm_con {
+  font-size: 2.5rem;
+  color: #a1e1ff;
+}
+
+/* Typing indicators */
+.cursor-highlight {
+  background-color: #ffbc42;
+  color: black;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+.wrong {
+  background-color: #ff4d4d;
+  color: #eaeaea;
+}
+
+.correct {
+  color: #a1e1ff;
+}
+
+/* Extra responsive adjustments */
+@media (max-width: 600px) {
+  #paragraph-box {
+      font-size: 18px;
   }
-  
+  #input-field {
+      font-size: 16px;
+  }
+}

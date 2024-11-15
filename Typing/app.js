@@ -28,6 +28,14 @@ let array_count = 0
 let typedChar_arr = []
 let charCheckWrong = false
 
+// New variables for tracking total practice time
+let totalPracticeTime = 0
+let totalPracticeInterval // Interval for tracking total practice time
+
+window.onbeforeunload = function() {
+  return "Input will be lost if you leave the page, are you sure?";
+};
+
 const words = [
     "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride"
 ]
@@ -44,6 +52,7 @@ function again() {
 function resetVal() {
   paragraphBox.scrollLeft = 0;
   clearInterval(timer)
+  stopTotalPracticeTimer() // Stop total practice time when reset
   inputArea.value = ''
   latest_arr_count = 0;
   time_container.innerText = '120'
@@ -145,6 +154,7 @@ function check() {
 
     if (curr_input_array.length == spanArray.length) {
       clearInterval(timer)
+      stopTotalPracticeTimer() // Stop total practice timer when finished
       displayResults()
     }
   })
@@ -159,16 +169,20 @@ function calculate_acc() {
 
 function time_counter() {
   time_container.innerText = count;
-
+  
+  startTotalPracticeTimer() // Start counting total practice time
+  
+  // Initialize the countdown timer
   timer = setInterval(() => {
     count--;
     time_container.innerText = count;
 
     if (count <= 0) { // Check if timer has reached 0
       clearInterval(timer);
+      stopTotalPracticeTimer() // Stop total practice timer when session ends
       displayResults();
     }
-  }, 1000) // Update every second
+  }, 1000); // Update every second
 }
 
 function calculate_wpm() {
@@ -226,5 +240,18 @@ inputArea.addEventListener('keydown', (e) => {
   }
 
 }, false)
+
+// Functions to start and stop the total practice time counter
+function startTotalPracticeTimer() {
+  clearInterval(totalPracticeInterval); // Clear any previous interval
+  totalPracticeInterval = setInterval(() => {
+    totalPracticeTime++;
+    document.getElementById('total-time-value').innerText = totalPracticeTime; // Update display
+  }, 1000);
+}
+
+function stopTotalPracticeTimer() {
+  clearInterval(totalPracticeInterval);
+}
 
 start()
