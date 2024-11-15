@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #1e1e2e;
+  background-color: #242424;
   color: #eaeaea;
   font-family: 'JetBrains Mono', monospace;
   display: flex;
@@ -24,14 +24,14 @@ main {
 
 /* Typing area and input box */
 #main-container {
-  background-color: #2e2e3a; 
+  background-color: #2f2f3a; 
   padding: 20px;
   border-radius: 12px;
   margin: 20px 0;
 }
 
 #paragraph-box {
-  color: #C4A7E7;
+  color: #FAFAFA;
   padding: 1rem;
   border-radius: 8px;
   font-size: 1.7em;
@@ -100,12 +100,14 @@ main {
   background-color: #ffbc42;
   color: black;
   border-radius: 4px;
-  padding: 0 2px;
+  font-size: 1.9em;
+  margin: 0 2px;
 }
 
 .wrong {
   background-color: #ff4d4d;
   color: #eaeaea;
+  text-decoration: line-through;
 }
 
 .correct {

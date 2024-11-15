@@ -246,7 +246,9 @@ function startTotalPracticeTimer() {
   clearInterval(totalPracticeInterval); // Clear any previous interval
   totalPracticeInterval = setInterval(() => {
     totalPracticeTime++;
-    document.getElementById('total-time-value').innerText = totalPracticeTime; // Update display
+    let minutes = Math.floor(totalPracticeTime / 60); // Minutes
+    let seconds = totalPracticeTime % 60; // Remaining seconds
+    document.getElementById('total-time-value').innerText = `${minutes} min ${seconds} sec`; // Update display
   }, 1000);
 }
 
