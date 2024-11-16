@@ -100,8 +100,8 @@ main {
   background-color: #ffbc42;
   color: black;
   border-radius: 4px;
-  font-size: 1.9em;
-  margin: 0 2px;
+  /* font-size: 1.9em; */
+  /* margin: 0 2px; */
 }
 
 .wrong {
