@@ -207,3 +207,25 @@ main {
 .fullscreen-stats div {
   font-size: 1.2rem;
 }
+
+#fullscreen-start-bttn {
+  position: fixed;
+  bottom: 20%;
+  left: 5%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  width: 120px;
+  height: 50px;
+  color: #ffffff;
+  background-color: #3b82f6; /* Vivid blue */
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none; /* Hidden by default */
+  transition: background 0.3s ease;
+}
+
+#fullscreen-start-bttn:hover {
+  background-color: #2563eb; /* Slightly darker blue */
+}

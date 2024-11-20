@@ -44,19 +44,22 @@ function toggleFullscreen() {
   const paragraphBox = document.getElementById("paragraph-box");
   const fullscreenBtn = document.getElementById("fullscreen-btn");
   const statsContainer = document.getElementById("stats-container");
-  const mainContainer = document.getElementById("main-container"); // Get main-container
+  const mainContainer = document.getElementById("main-container");
+  const fullscreenStartButton = document.getElementById("fullscreen-start-bttn"); // Get new Start button
 
   if (paragraphBox.classList.contains("fullscreen")) {
     // Exit fullscreen
     paragraphBox.classList.remove("fullscreen");
     statsContainer.classList.remove("fullscreen-stats");
     mainContainer.style.backgroundColor = ""; // Restore default background
+    fullscreenStartButton.style.display = "none"; // Hide fullscreen Start button
     fullscreenBtn.innerText = "🔳"; // Restore fullscreen icon
   } else {
     // Enter fullscreen
     paragraphBox.classList.add("fullscreen");
     statsContainer.classList.add("fullscreen-stats");
     mainContainer.style.backgroundColor = "#1e1e30"; // Set background color
+    fullscreenStartButton.style.display = "block"; // Show fullscreen Start button
     fullscreenBtn.innerText = "❌"; // Change to exit icon
   }
 }
