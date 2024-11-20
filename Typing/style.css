@@ -103,9 +103,9 @@ main {
 
 .wrong {
   /* background-color: #ef4444;  */
-  color: #ffffff;
+  color: #ef4444;
   /* text-decoration: line-through; */
-  text-decoration: underline #ef4444;
+  /* text-decoration: underline #ef4444; */
 }
 
 .correct {
@@ -122,7 +122,6 @@ main {
     font-size: 16px;
   }
 }
-
 
 /* Fullscreen button */
 #fullscreen-btn {
@@ -210,7 +209,7 @@ main {
 
 #fullscreen-start-bttn {
   position: fixed;
-  bottom: 20%;
+  bottom: 26%;
   left: 5%;
   transform: translateX(-50%);
   z-index: 1001;
