@@ -40,6 +40,27 @@ const words = [
     "jude fired juie ire ride deer ride feud deer jerk fire ire ride free ire juie ire ride deer ire fuel ire ride fury ire juie ride free kid ride feud ire deer ride free ire kid deer ire fury ride ire jerk kid fire ire ride fury ire fuel ire juie ire ride ire kid deer ire feud ire deer ire ride ire free ire ride"
 ]
 
+function toggleFullscreen() {
+  const paragraphBox = document.getElementById("paragraph-box");
+  const fullscreenBtn = document.getElementById("fullscreen-btn");
+  const statsContainer = document.getElementById("stats-container");
+  const mainContainer = document.getElementById("main-container"); // Get main-container
+
+  if (paragraphBox.classList.contains("fullscreen")) {
+    // Exit fullscreen
+    paragraphBox.classList.remove("fullscreen");
+    statsContainer.classList.remove("fullscreen-stats");
+    mainContainer.style.backgroundColor = ""; // Restore default background
+    fullscreenBtn.innerText = "🔳"; // Restore fullscreen icon
+  } else {
+    // Enter fullscreen
+    paragraphBox.classList.add("fullscreen");
+    statsContainer.classList.add("fullscreen-stats");
+    mainContainer.style.backgroundColor = "#1e1e30"; // Set background color
+    fullscreenBtn.innerText = "❌"; // Change to exit icon
+  }
+}
+
 function again() {
   resetVal()
   inputArea.focus()

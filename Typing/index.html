@@ -12,7 +12,15 @@
 <body>
     <main>
         <section id="main-container">
+            <audio id="correct-sound" src="correct.mp3" preload="auto"></audio>
+            <audio id="wrong-sound" src="wrong.mp3" preload="auto"></audio>
+
+
             <div id="paragraph-box" onclick="focus_now()"></div>
+            <div id="paragraph-box" onclick="focus_now()">
+                <button id="fullscreen-btn" onclick="toggleFullscreen(event)">🔳</button>
+              </div>
+              
             <input type="text" id="input-field" oninput='check()' placeholder="Type here...">
         </section>
         <button id="start-bttn" onclick="again()">Start</button>

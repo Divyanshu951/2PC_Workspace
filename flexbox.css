@@ -27,7 +27,7 @@ body {
     height: 400px;
     margin-bottom: 20px;
 
-
+    
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
