@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <title>CAP Script</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
@@ -119,10 +120,10 @@
             right: 20px;
             background-color: #ccc;
             padding: 2px;
-            cursor: pointer;
-            border-radius: 5px;
+            /* cursor: pointer; */
+            /* border-radius: 5px; */
 
-            font-size: 6px;
+            /* font-size: 20px; */
             /*width: 300px;*/
             color: black;
             border-radius: 10px;
@@ -346,59 +347,6 @@
             /* Adds space between the text and the "i" icon */
         }
 
-        .hover-circle-container {
-            position: relative;
-            display: inline-flex;
-        }
-
-        .hover-circle {
-            width: 20px;
-            height: 20px;
-            background-color: #333;
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .hover-tooltip {
-            visibility: hidden;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 5px;
-            border-radius: 5px;
-            position: absolute;
-            left: 100%;
-            /* Position beside the circle */
-            top: 50%;
-            transform: translateY(-50%);
-            margin-left: 10px;
-            white-space: nowrap;
-            z-index: 1;
-        }
-
-        .hover-circle:hover+.hover-tooltip {
-            visibility: visible;
-        }
-
-        #timer-container {
-            position: fixed;
-            bottom: 5px;
-            left: 5px;
-            width: 200px;
-            /* Default width */
-            height: 15x;
-            /* Default height */
-            resize: both;
-            /* Allows resizing */
-            overflow: auto;
-        }
-
         /* Slider Container */
 
         .slider-container69 {
@@ -451,6 +399,7 @@
         .chat-content69 {
             color: black;
             margin-top: 20px;
+            margin-bottom: 5px;
             padding: 10px;
             background-color: #b6b2b2;
             border-radius: 5px;
@@ -463,22 +412,21 @@
 
         /* Toggle Button */
 
-        .toggle-button69 {
+        .toggle-button69{
             position: fixed;
-            top: 77.5%;
-            left: 0;
+            bottom: 230px;
+            left: 0px;
             transform: translateY(-50%);
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 15px 21px;
             cursor: pointer;
             z-index: 1001;
             transition: left 0.3s ease;
             border-radius: 4px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-
         /* Open state */
 
         .side-panel69.open {
@@ -486,7 +434,7 @@
         }
 
         .toggle-button69.open {
-            left: 0;
+            left: 0px;
         }
 
         /* Copyable line and tooltip styles */
@@ -665,6 +613,146 @@
             width: 100%;
             /* Full width for each line container */
         }
+
+
+        /* TIMER BLOCK */
+
+
+
+        .timer-container {
+            border: 1px solid rgb(51, 50, 50);
+      position: fixed;
+      bottom: 1px;
+      left: 1px;
+      width: 45px;
+      height: 230px;
+      background-color: #111; /* Dark container background */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Depth effect */
+      display: flex;
+      justify-content: center;
+      z-index: 1001;
+      align-items: center;
+      overflow: hidden; /* Ensure content doesn't overflow */
+      transition: background-color 0.5s ease; /* Smooth transition for flashing */
+    }
+
+    .timer {
+      font-size: 1.2rem; /* Adjust font size to fit the smaller container */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+    }
+
+    .digit, .separator {
+      width: 30px;
+      height: 40px;
+      background-color: rgba(224, 104, 102, 1);; /* Bright red tiles */
+      color: #fff; /* White text on red tiles */
+      border-radius: 5px; /* Slightly rounded corners */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      margin: 2px; /* Small margin between digits */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); /* Shadow for depth */
+      cursor: pointer;
+    }
+
+    .separator {
+      background-color: transparent;
+      color: #d32f2f; /* Red separator */
+      font-size: 1rem;
+      box-shadow: none;
+    }
+
+    .flashing {
+      background-color: #4caf50 !important; /* Flash green */
+    }
+
+        /* TIMER BLOCK END*/
+
+
+        /* Email */
+
+        .email-container-new {
+      display: flex;
+      gap: 2px;
+      /* flex-wrap: wrap; */
+      justify-content: center;
+      padding: 5px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background-color: #1e1e1e;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .input-cell {
+      width: 30%;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+      border: 1px solid #004080;
+    }
+
+    .input-text {
+      width: 90%;
+      font-size: 22px;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 12px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background-color: #333;
+      color: #ffffff;
+    }
+
+    .input-area {
+      width: 85%;
+      padding: 12px;
+      margin-bottom: 12px;
+      background-color: #333;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      border-radius: 8px;
+      resize: vertical;
+      height: auto;
+      overflow: hidden; /* Prevents scrollbars */
+    }
+
+    .input-text:focus,
+    .input-area:focus {
+      outline: none;
+      border-color: #e76005;
+      background-color: #292929;
+    }
+
+    .copy-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .copy-button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .copy-button:active {
+      background-color: #004080;
+    }
+
     </style>
 
     <link rel="icon" type="image/png" href="https://www.20i.com/blog/wp-content/uploads/2020/10/Favicons-740x416.png">
@@ -672,14 +760,34 @@
 
 <body>
 
+    <!-- /* TIMER BLOCK HTML*/ -->
+
+    <div class="timer-block">
+        <div class="timer-container" id="timer-container">
+            <div class="timer" id="timer">
+              <div class="digit" id="minute1">0</div>
+              <div class="digit" id="minute2">2</div>
+              <div class="separator">-</div>
+              <div class="digit" id="second1">0</div>
+              <div class="digit" id="second2">0</div>
+            </div>
+          </div>
+        
+          <audio id="alarm" src="alarm.wav"></audio>
+    </div>
+
+    <!-- /* TIMER BLOCK END*/ -->
+
+
+
 
     <div id="color-picker-popup" class="popup" style="display: none;">
         <h4>Customize Colors:</h4>
         <label for="bg-color">Background Color (Hex):</label>
-        <input type="text" id="bg-color" placeholder="#000000">
+        <input type="text" id="bg-color" value="#" placeholder="#000000">
         <br>
         <label for="text-color">Text Color (Hex):</label>
-        <input type="text" id="text-color" placeholder="#ffffff">
+        <input type="text" id="text-color" value="#" placeholder="#ffffff">
         <br>
         <button id="submit-colors" onclick="applyCustomColors()">Submit</button>
     </div>
@@ -793,10 +901,11 @@
 
         <!-- Toggle Button -->
         <button class="toggle-button69" style="width: 35px;" id="toggleButton69" onclick="togglePanel()">☰</button>
-    </div>
-    <h1 style="color:white; text-align: center; text-decoration: underline;">CAP Script </h1>
 
-    <h3 style="color:red; text-align: center;"> OPENING: </h3>
+    </div>
+    <h1 style="text-align: center; color: white; text-decoration: dashed;">CAP Script  </h1>
+
+    <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> OPENING: </h3>
 
     <div id="text-container">
         <p style="color: DodgerBlue; cursor: pointer;" onclick="copyToClipboard(this)">
@@ -841,7 +950,7 @@
             </span>
         </p>
 
-        <h3 style="color:red; text-align: center;"> WAITING: </h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> WAITING: </h3>
 
         <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
@@ -865,7 +974,7 @@
         </p>
 
 
-        <h3 style="color:red; text-align: center;"> REFUND/REPLACEMENT CONFIRMATION: </h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> REFUND/REPLACEMENT CONFIRMATION: </h3>
 
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
@@ -900,7 +1009,7 @@
             </span>
         </p>
 
-        <h3 style="color:red; text-align: center;"> Others:</h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> Others:</h3>
 
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
@@ -917,7 +1026,7 @@
             </span>
         </p>
 
-        <h3 style="color:red; text-align: center;"> INCIDENT REPORT 📝</h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> INCIDENT REPORT 📝</h3>
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
@@ -937,16 +1046,12 @@
             <span class="tooltip" style="color:Violet;">
         <span class="copyable-content">
             Please return the Incident Report on or before 
-            <span style="color:red;" id="formattedDate2">
+            <span style="color:rgba(224, 104, 102, 1);;" id="formattedDate2">
                 <span id="IRdateforline">DATE</span>
             <!-- Default text when no date is selected -->
             </span> to be considered for review.
             </span>
             <span class="tooltiptext" id="tooltip2"></span>
-            </span>
-            <span class="hover-circle-container">
-        <span class="hover-circle"> </span>
-            <span class="hover-tooltip">Choose the date on dateCalc and it will be added to the line</span>
             </span>
         </p>
 
@@ -960,25 +1065,21 @@
             </span>
         </p>
 
-        <h3 style="color:red; text-align: center;"> 3DI⏰ </h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> 3DI⏰ </h3>
 
         <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip" style="color:DodgerBlue;">
                 I'm sorry to hear that you haven't received your item. We need to investigate further and ask that you please wait three days. If you still haven't received your item, please contact us again after                
-            <span style="color:red;" id="formattedDate">
+            <span style="color:rgba(224, 104, 102, 1);;" id="formattedDate">
                 <span id="threeDaysDateResult"></span>
             <!-- This will show the calculated date -->
             </span>.
             <span class="tooltiptext" id="tooltip2"></span>
             </span>
-            <span class="hover-circle-container">
-                <span class="hover-circle"> </span>
-            <span class="hover-tooltip">Choose the date on dateCalc and it will be added to the line</span>
-            </span>
         </p>
 
 
-        <h3 style="color:red; text-align: center;"> Transfers and Others:</h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> Transfers and Others:</h3>
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
@@ -1008,7 +1109,7 @@
             </span>
         </p>
 
-        <h3 style="color:red; text-align: center;"> CLOSING: </h3>
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> CLOSING: </h3>
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
@@ -1053,24 +1154,31 @@
         </p>
 
 
-        <h2 style="color:red; text-align: center;"> REFUND EMAIL</h2>
+        <h2 style="color:rgba(224, 104, 102, 1);red; text-align: center;"> EMAILS:</h2>
         <div class="refund">
-            <p class="copyable-line" onclick="copyToClipboard(this)">
-                <span class="tooltip" style="color:white;">
-        Hello,
-        </br>
-        </br>I'm sorry to hear that your item [ITEM] did not arrive.
-        </br>I’ve requested a refund for £[amount]. This will go through within the next 5-7 business days and will appear as a credit on your billing statement.
-        </br>
-        </br>On the date the refund is completed, we'll send you an e-mail confirming the date, amount and payment details. After receiving this confirmation e-mail, you can view the refund details on the Order Summary in Your Account (https://www.amazon.co.uk/your-account). Completed refunds will appear at the bottom of an individual order summary page.
-        </br>
-        </br>I hope this helps.
-        </br>
-        </br> We look forward to seeing you again soon.
+            <div class="email-container-new">
+                <!-- Cell 1 -->
+                <div class="input-cell">
+                  <input type="text" class="input-text" placeholder="Title 1">
+                  <textarea id="input-box-1" class="input-area" placeholder="Enter text for box 1"></textarea>
+                  <button class="copy-button" onclick="copyText(1)">Copy</button>
+                </div>
+            
+                <!-- Cell 2 -->
+                <div class="input-cell">
+                  <input type="text" class="input-text" placeholder="Title 2">
+                  <textarea id="input-box-2" class="input-area" placeholder="Enter text for box 2"></textarea>
+                  <button class="copy-button" onclick="copyText(2)">Copy</button>
+                </div>
+            
+                <!-- Cell 3 -->
+                <div class="input-cell">
+                  <input type="text" class="input-text" placeholder="Title 3">
+                  <textarea id="input-box-3" class="input-area" placeholder="Enter text for box 3"></textarea>
+                  <button class="copy-button" onclick="copyText(3)">Copy</button>
+                </div>
+              </div>
 
-        <span class="tooltiptext" id="tooltip2"></span>
-                </span>
-            </p>
         </div>
     </div>
 
@@ -1100,21 +1208,64 @@
 
     <!--================================================================================-->
 
-    <button class="dark-mode-switch" style="height: 35px; width: 35px;" onclick="toggleDarkMode0()"></button>
+    <button class="dark-mode-switch" style="height: 35px; width: 35px;" onclick="toggleDarkMode1()"></button>
 
-    <button class="dark-mode-switch" style="top: 120px; height: 35px; width: 35px;    background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);" onclick="toggleDarkMode()"></button>
+    <button class="dark-mode-switch" style="top: 120px; height: 35px; width: 35px;    background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3);" onclick="toggleDarkMode3()"></button>
 
 
     <button class="dark-mode-switch" style="top: 70px; background-color: #080e2c; height: 35px; width: 35px; border: 1px solid white;" onclick="toggleDarkMode2()"></button>
 
 
-    <div id="timer-container" style="text-align: center; padding: 10px; border: 0.1px solid #e8eee8; border-radius: 10px;">
+    <div id="dumb" style="display: none;">
         <input type="number" id="time-input" style="width: 90px; display: inline-block; vertical-align: middle; padding: 5px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px;" value="120" min="0" />
         <button id="set-timer" style="font-size: 12px; display: inline-block; vertical-align: middle; width: 70px; padding: 6px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Set Timer</button>
-        <iframe id="timer-frame" width="200" height="100" src="https://vclock.com/embed/timer/#countdown=00:02:00&date=2024-10-29T03:15:58&theme=1&ampm=1&sound=classic" frameborder="0" allowfullscreen style="margin-top: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></iframe>
     </div>
 
     <script>
+        let lastShiftPress = 0; // Track the timestamp of the last Shift key press
+        const DOUBLE_SHIFT_INTERVAL = 300; // Max interval for detecting double Shift (in ms)
+        const minute1 = document.getElementById("minute1");
+    const minute2 = document.getElementById("minute2");
+    const second1 = document.getElementById("second1");
+    const second2 = document.getElementById("second2");
+    const timerDiv = document.getElementById("timer");
+    const timerContainer = document.getElementById("timer-container"); // Reference to the container
+    const alarm = document.getElementById("alarm");
+
+    let totalSeconds = 120; // Initial time (02:00)
+    let interval = null;
+    let flashingInterval = null; // Variable to store setInterval for flashing
+
+        // Add a keydown listener for double Shift detection
+        document.addEventListener("keydown", (event) => {
+                if (event.key === "Shift") {
+                const currentTime = Date.now();
+                if (currentTime - lastShiftPress < DOUBLE_SHIFT_INTERVAL) {
+                // Double Shift detected
+                event.preventDefault(); // Optional: Prevent default behavior
+                togglePanel(); // Trigger the panel toggle function
+                }
+                lastShiftPress = currentTime; // Update the last Shift key press time
+            }
+        });
+
+
+        function copyText(cellNumber) {
+      const inputElement = document.getElementById("input-box-" + cellNumber);
+      const button = document.getElementsByClassName("copy-button")[cellNumber - 1];
+
+      inputElement.select();
+      navigator.clipboard.writeText(inputElement.value);
+
+      button.textContent = "Copied!";
+      button.style.backgroundColor = "#28a745";
+
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "#007BFF";
+      }, 2000);
+    }
+
         function copyToClipboard(element) {
             const copyText = element.innerText.trim();
             const textarea = document.createElement('textarea');
@@ -1162,7 +1313,7 @@
             }
 
         // Toggle dark mode
-        function toggleDarkMode0() {
+        function toggleDarkMode1() {
             document.body.classList.toggle('dark-mode');
         }
 
@@ -1170,7 +1321,7 @@
             document.body.classList.toggle('dark-mode2');
         }
 
-        function toggleDarkMode() {
+        function toggleDarkMode3() {
             document.body.classList.toggle('dark-mode');
             const popup = document.getElementById('color-picker-popup');
             popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
@@ -1467,6 +1618,77 @@
             const copyableLines = document.querySelectorAll('.copyable-line69');
             copyableLines.forEach(line => line.classList.toggle('dark-mode'));
         }
+
+    function updateTimer() {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      minute1.textContent = Math.floor(minutes / 10);
+      minute2.textContent = minutes % 10;
+      second1.textContent = Math.floor(seconds / 10);
+      second2.textContent = seconds % 10;
+
+      if (totalSeconds > 0) {
+        totalSeconds--;
+      } else {
+        clearInterval(interval); // Stop when time reaches 0
+        interval = null;
+        triggerAlarm(); // Trigger alarm and flashing effect
+      }
+    }
+
+    function startTimer() {
+      if (!interval) {
+        interval = setInterval(updateTimer, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(interval);
+      interval = null;
+      totalSeconds = 120; // Reset to 02:00
+      updateTimer(); // Immediately update the display
+      stopFlashing(); // Remove flashing if it was active
+    }
+
+    function triggerAlarm() {
+      alarm.play(); // Play the alarm sound
+      startFlashing();
+      setTimeout(() => {
+        stopFlashing(); // Stop flashing after 10 seconds
+        resetTimer(); // Reset the timer after 10 seconds
+      }, 10000); // 10 seconds timeout for stopping flashing and resetting the timer
+    }
+
+    function startFlashing() {
+      flashingInterval = setInterval(() => {
+        timerContainer.classList.toggle("flashing");
+      }, 500); // Toggle flashing every 500ms
+      timerContainer.classList.add("flashing");
+    }
+
+    function stopFlashing() {
+      clearInterval(flashingInterval); // Clear the flashing interval to stop flashing
+      timerContainer.classList.remove("flashing"); // Remove the flashing class
+    }
+
+    // Event listener for single click (start) and double-click (reset)
+    let clickTimeout;
+    timerDiv.addEventListener("click", () => {
+      if (clickTimeout) {
+        clearTimeout(clickTimeout);
+        clickTimeout = null;
+        resetTimer(); // Double-tap resets the timer
+      } else {
+        clickTimeout = setTimeout(() => {
+          startTimer(); // Single-click starts the timer
+          clickTimeout = null;
+        }, 300); // Adjust timeout for double-click detection
+      }
+    });
+
+    // Initialize the display
+    updateTimer();
     </script>
 </body>
 
