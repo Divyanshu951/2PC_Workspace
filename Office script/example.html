@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Positioning Color Picker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Vertical button container */
+    .vertical-buttons {
+      position: fixed;
+      top: 220px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+      border: 1px solid rgb(209, 19, 19);
+      border-radius: 5px;
+    }
+
+    /* Color picker */
+    .color-picker {
+      border: none;
+      background: none;
+      cursor: pointer;
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Vertical button layout -->
+  <div class="vertical-buttons">
+    <!-- Background Color Section -->
+    <div>
+      <input type="color" id="bgColorPicker" class="color-picker" style="top: 10px;">
+    </div>
+
+    <!-- Text Color Section -->
+    <div>
+      <input type="color" id="textColorPicker" class="color-picker" style="top: 60px;">
+    </div>
+  </div>
+
+  <script>
+    // Background Color Picker
+    const bgColorPicker = document.getElementById("bgColorPicker");
+    const bgColorBox = document.getElementById("bgColorBox");
+
+    bgColorPicker.addEventListener("input", (event) => {
+      const color = event.target.value;
+      document.body.style.backgroundColor = color;
+      bgColorBox.style.backgroundColor = color;
+    });
+
+    // Text Color Picker
+    const textColorPicker = document.getElementById("textColorPicker");
+    const textColorBox = document.getElementById("textColorBox");
+
+    textColorPicker.addEventListener("input", (event) => {
+      const color = event.target.value;
+      document.body.style.color = color;
+      textColorBox.style.backgroundColor = color;
+    });
+  </script>
+</body>
+</html>
