@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script_new</title>
+    <style>
+        * {
+            font-family: "Noto Sans", sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            /* Light mode background color */
+            color: #000;
+            /* Light mode text color */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Dark mode background color */
+            color: #fff;
+            /* Dark mode text color */
+        }
+
+        body.dark-mode2 {
+            background-color: #080e2c;
+            /* Dark mode background color */
+            color: #fff;
+            /* Dark mode text color */
+        }
+
+        /* Dark mode  */
+        .dark-mode-switch, .dark-mode-switch2 {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            outline: none;
+            height: 35px; 
+            width: 35px;
+        }
+
+        .dark-mode-switch2 {
+            top: 70px;
+            background-color: #080e2c; 
+            border: 1px solid white;
+        }
+
+
+        /* Main */
+        body {
+            font-size: 15px;
+            color: #333;
+            background: white;
+            padding: 60px 95px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "kern";
+            font-kerning: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark mode realted area -->
+
+    <button class="dark-mode-switch" onclick="toggleDarkMode1()"></button>
+    <button class="dark-mode-switch2" onclick="toggleDarkMode2()"></button>
+
+    <!-- Dark mode realted area END-->
+
+    <!-- Main  -->
+
+    <div id="text-container">
+        <p style="color: DodgerBlue; cursor: pointer;" onclick="copyToClipboard(this)">
+            <span style="position: relative;">
+                <span id="greeting-text">Hello, My name is <span id="name-placeholder">[Insert_Name_Below_and_Press_Enter]</span>. How may I help you today?</span>
+            <span style="visibility: hidden; position: absolute; background-color: black; color: #fff; text-align: center; padding: 5px; border-radius: 5px; top: -30px; left: 50%; transform: translateX(-50%);" class="tooltiptext"></span>
+            </span>
+        </p>
+
+        <input type="text" id="name-input" value="Divyanshu @divyande" placeholder="Enter your name" onkeydown="updateName(event)" style="margin-top: 10px;">
+
+
+        <!-- change -->
+
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Terribly sorry about the whole experience, we really never want any of our customer to suffer through such incidents.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+        <!-- Add more lines as needed -->
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Could you please confirm if you received empty box with missing item or nothing was delivered?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I apologize for the inconvenience.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Please give me a moment to analyze your previous conversation.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> WAITING: </h3>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Could you please stay connected for two minutes while I check this for you?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I’m sorry this is taking longer than expected, could you please stay connected for another 2 minutes while I check this for you?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Thank you for staying connected.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> REFUND/REPLACEMENT CONFIRMATION: </h3>
+
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I can create a return label and you will receive the full refund once we receive the order, Is that alright with you?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Would you like the return to be an label less drop off or a normal pick up for return?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h4 style="color:Violet;"> RETURNS: </h4>
+
+        <p style="color:#98FB98;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+                I have successfully submitted a return request for your order. The return label will be sent to you within the next 2 - 4 hours.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h4 style="color:Violet;"> REFUND: </h4>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        I've successfully initiated a refund for your order. You'll see this refund in 5 - 7 days in your account. You’ll receive a refund confirmation e-mail once it’s completed.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> Others:</h3>
+
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Just to confirm, Are you referring to the item XXXXX?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Thank you for confirming.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+                Could you please elaborate on the issue so I can assist you better?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> INCIDENT REPORT 📝</h3>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        In order to go ahead with the refund process we request you to please fill out the report that I will send you right after this chat ends through email and reply back to the same email with your responses.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerDodgerBlueBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:Violet;">
+        I apologize that you haven't received your item. To better understand the issue and investigate the problem, please complete the incident report that I have emailed to you. Once you have completed and returned the Incident Report, we’ll review and let you know the status of your request.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:Violet;">
+        <span class="copyable-content">
+            Please return the Incident Report on or before 
+            <span style="color:rgba(224, 104, 102, 1);;" id="formattedDate2">
+                <span id="IRdateforline">DATE</span>
+            <!-- Default text when no date is selected -->
+            </span> to be considered for review.
+            </span>
+            <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        You will receive the email just after this chat ends.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> 3DI⏰ </h3>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:DodgerBlue;">
+                I'm sorry to hear that you haven't received your item. We need to investigate further and ask that you please wait three days. If you still haven't received your item, please contact us again after                
+            <span style="color:rgba(224, 104, 102, 1);;" id="formattedDate">
+                <span id="threeDaysDateResult"></span>
+            <!-- This will show the calculated date -->
+            </span>.
+            <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> Transfers and Others:</h3>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        PLEASE IGNORE THE LAST ANNOTATION.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Me and my manager share the same resources and they might have the same resolution.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Please stay connected while i transfer this chat to my manager.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        cx wanted to talk to my manager, Hence escalated.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> CLOSING: </h3>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Is there anything else I can help you with today apart from this?
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Thank you for your understanding.
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+        <p style="color:#98FB98;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        You're most welcome
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:#FFFF00;">
+        You're welcome. It was a pleasure assisting you today. Thank you for contacting Amazon Support. Have a great day! Bye. Take Care :).
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:white;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip" style="color:#;">
+        It was a pleasure assisting you today. Thank you for contacting Amazon Support. Have a great day! Bye. Take Care :).
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
+            <span class="tooltip">
+        Your chat session has been idle for 2 minutes, so I'm closing this session. Feel free to get in touch with us again if you have any more concerns, It was a pleasure assisting you today. Thank you for contacting Amazon Support. Have a great day! Bye. Take Care :).
+        <span class="tooltiptext" id="tooltip2"></span>
+            </span>
+        </p>
+
+
+        <h2 style="color:rgba(224, 104, 102, 1); text-align: center;"> EMAILS:</h2>
+        <div class="refund">
+            <div class="email-container-new">
+                <!-- Cell 1 -->
+                <div class="input-cell">
+                    <input type="text" class="input-text" placeholder="Title 1">
+                    <textarea id="input-box-1" class="input-area" placeholder="Enter text"></textarea>
+                    <button class="copy-button" onclick="copyText(1)">Copy</button>
+                </div>
+
+                <!-- Cell 2 -->
+                <div class="input-cell">
+                    <input type="text" class="input-text" placeholder="Title 2">
+                    <textarea id="input-box-2" class="input-area" placeholder="Enter text"></textarea>
+                    <button class="copy-button" onclick="copyText(2)">Copy</button>
+                </div>
+
+                <!-- Cell 3 -->
+                <div class="input-cell">
+                    <input type="text" class="input-text" placeholder="Title 3">
+                    <textarea id="input-box-3" class="input-area" placeholder="Enter text"></textarea>
+                    <button class="copy-button" onclick="copyText(3)">Copy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main end -->
+
+    <!-- Javascript -->
+    <script>
+        // Toggle dark mode
+        function toggleDarkMode1() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function toggleDarkMode2() {
+            document.body.classList.toggle('dark-mode2');
+        }
+
+        // Toggle dark mode END
+
+
+    </script>
+</body>
+</html>

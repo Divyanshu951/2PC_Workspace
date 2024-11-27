@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Input and Copy Functionality</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .email-container-new {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background-color: #1e1e1e;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .input-cell {
+      width: 300px;
+      padding: 16px;
+      border-radius: 10px;
+      background-color: #252525;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .input-text {
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 12px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      background-color: #333;
+      color: #28a745;
+    }
+
+    .input-area {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      background-color: #333;
+      color: #e0e0e0;
+      border: 1px solid #444;
+      border-radius: 8px;
+      resize: none;
+      height: 10px;
+      overflow: hidden; /* Prevents scrollbars */
+    }
+
+    .input-text:focus,
+    .input-area:focus {
+      outline: none;
+      border-color: #007BFF;
+      background-color: #292929;
+    }
+
+    .copy-button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .copy-button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .copy-button:active {
+      background-color: #004080;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="email-container-new">
+    <!-- Cell 1 -->
+    <div class="input-cell">
+      <input type="text" class="input-text" placeholder="Title 1">
+      <textarea id="input-box-1" class="input-area" placeholder="Enter text for box 1"></textarea>
+      <button class="copy-button" onclick="copyText(1)">Copy</button>
+    </div>
+
+    <!-- Cell 2 -->
+    <div class="input-cell">
+      <input type="text" class="input-text" placeholder="Title 2">
+      <textarea id="input-box-2" class="input-area" placeholder="Enter text for box 2"></textarea>
+      <button class="copy-button" onclick="copyText(2)">Copy</button>
+    </div>
+
+    <!-- Cell 3 -->
+    <div class="input-cell">
+      <input type="text" class="input-text" placeholder="Title 3">
+      <textarea id="input-box-3" class="input-area" placeholder="Enter text for box 3"></textarea>
+      <button class="copy-button" onclick="copyText(3)">Copy</button>
+    </div>
+  </div>
+
+  <script>
+    function copyText(cellNumber) {
+      const inputElement = document.getElementById("input-box-" + cellNumber);
+      const button = document.getElementsByClassName("copy-button")[cellNumber - 1];
+
+      inputElement.select();
+      navigator.clipboard.writeText(inputElement.value);
+
+      button.textContent = "Copied!";
+      button.style.backgroundColor = "#28a745";
+
+      setTimeout(() => {
+        button.textContent = "Copy";
+        button.style.backgroundColor = "#007BFF";
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>

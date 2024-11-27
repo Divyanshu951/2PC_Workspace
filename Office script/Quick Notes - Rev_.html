@@ -1,0 +1,714 @@
+<!doctype html>
+<html><head><title>Quick Notes - Rev:</title><meta charset="UTF-8"><link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,700,700italic|Roboto:400,700,700italic,400italic" rel="stylesheet" type="text/css"><style>/*
+ * Copyright 2014 Quip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    font-size: 15px;
+    color: #333;
+    background: white;
+    padding: 60px 95px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern";
+    font-kerning: normal;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+th {
+    font-family: Roboto, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 1.25em;
+    margin-bottom: 0.75em;
+}
+
+h1 {
+    font-size: 35px;
+    line-height: 42px;
+}
+
+h1:first-child {
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 22px;
+    line-height: 22px;
+}
+
+h3 {
+    font-size: 18px;
+    line-height: 16px;
+}
+
+h4,
+h5,
+h6 {
+    font-size: 15px;
+    line-height: 14px;
+}
+h5 {
+    font-style: italic;
+}
+
+h6 {
+    font-weight: unset;
+    text-decoration: underline;
+}
+
+.capitalize-h3 h3 {
+    text-transform: uppercase;
+}
+
+/* Body text */
+body,
+p,
+ul,
+ol,
+td {
+    font-family: "Crimson Text", serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+blockquote,
+q {
+    display: block;
+    margin: 1em 0;
+    font-style: italic;
+}
+
+blockquote a,
+q a {
+    text-decoration: underline;
+}
+
+blockquote {
+    padding-left: 10px;
+    border-left: 4px solid #a6a6a6;
+}
+
+q {
+    color: #a6a6a6;
+    line-height: 40px;
+    font-size: 24px;
+    text-align: center;
+    quotes: none;
+}
+
+q a {
+    color: #a6a6a6;
+}
+
+code,
+pre {
+    font-family: Consolas, "Liberation Mono", Menlo, "Courier Prime Web",
+        Courier, monospace;
+    background: #f2f2f2;
+}
+
+code {
+    padding: 1px;
+    margin: 0 -1px;
+    border-radius: 3px;
+}
+
+pre {
+    display: block;
+    line-height: 20px;
+    text-shadow: 0 1px white;
+    padding: 5px 5px 5px 30px;
+    white-space: nowrap;
+    position: relative;
+    margin: 1em 0;
+}
+
+pre:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    border-left: solid 1px #dadada;
+}
+
+/* Text Alignment */
+.line {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: end;
+}
+
+/* Lists */
+div[data-section-style="5"],
+div[data-section-style="6"],
+div[data-section-style="7"] {
+    margin: 12px 0;
+}
+
+ul {
+    padding: 0 0 0 40px;
+}
+
+ul li {
+    margin-bottom: 0.4em;
+}
+
+/* Bulleted list */
+div[data-section-style="5"] ul {
+    list-style-type: disc;
+}
+div[data-section-style="5"] ul ul {
+    list-style-type: circle;
+}
+div[data-section-style="5"] ul ul ul {
+    list-style-type: square;
+}
+div[data-section-style="5"] ul ul ul ul {
+    list-style-type: disc;
+}
+div[data-section-style="5"] ul ul ul ul ul {
+    list-style-type: circle;
+}
+div[data-section-style="5"] ul ul ul ul ul ul {
+    list-style-type: square;
+}
+
+/* Numbered list */
+div[data-section-style="6"] ul {
+    list-style-type: decimal;
+}
+div[data-section-style="6"] ul ul {
+    list-style-type: lower-alpha;
+}
+div[data-section-style="6"] ul ul ul {
+    list-style-type: lower-roman;
+}
+div[data-section-style="6"] ul ul ul ul {
+    list-style-type: decimal;
+}
+div[data-section-style="6"] ul ul ul ul ul {
+    list-style-type: lower-alpha;
+}
+div[data-section-style="6"] ul ul ul ul ul ul {
+    list-style-type: lower-roman;
+}
+
+/* Checklist */
+div[data-section-style="7"] ul {
+    list-style-type: none;
+}
+
+div[data-section-style="7"] ul li:before {
+    content: "\2610";
+    position: absolute;
+    display: inline;
+    margin-right: 1.2em;
+    margin-left: -1.2em;
+}
+
+div[data-section-style="7"] ul li.checked {
+    text-decoration: line-through;
+}
+
+div[data-section-style="7"] ul li.checked:before {
+    content: "\2611";
+    text-decoration: none;
+}
+
+/* Tables */
+div[data-section-style="8"] {
+    margin: 12px 0;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border: solid 1px #bbb;
+    table-layout: fixed;
+    position: relative;
+}
+
+table th,
+table td {
+    padding: 2px 2px 0;
+    min-width: 1.5em;
+    word-wrap: break-word;
+}
+
+table th {
+    border-bottom: 1px solid #c7cbd1;
+    background: #f2f2f2;
+    font-weight: bold;
+    vertical-align: bottom;
+    color: #3a4449;
+    text-align: center;
+}
+
+table td {
+    padding-top: 0;
+    border-left: 1px solid #c7cbd1;
+    border-top: 1px solid #c7cbd1;
+    vertical-align: top;
+}
+
+table td.bold {
+    font-weight: bold;
+}
+
+table td.italic {
+    font-style: italic;
+}
+
+table td.underline {
+    text-decoration: underline;
+}
+
+table td.strikethrough {
+    text-decoration: line-through;
+}
+
+table td.underline.strikethrough {
+    text-decoration: underline line-through;
+}
+
+table td:first-child {
+    border-left: hidden;
+}
+
+table tr:first-child td {
+    border-top: hidden;
+}
+
+/* Images */
+div[data-section-style="11"] {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div[data-section-style="11"][data-section-float="0"] {
+    clear: both;
+    text-align: center;
+}
+
+div[data-section-style="11"][data-section-float="1"] {
+    float: left;
+    clear: left;
+    margin-right: 20px;
+}
+
+div[data-section-style="11"][data-section-float="2"] {
+    float: right;
+    clear: right;
+    margin-left: 20px;
+}
+
+div[data-section-style="11"] img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+div[data-section-style="11"].show-border {
+    outline: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+hr {
+    width: 70px;
+    margin: 20px auto;
+}
+
+/* Apps */
+div[data-section-style="19"].placeholder {
+    margin: 0.8em auto;
+    padding: 4px 0;
+    display: block;
+    color: #3d87f5;
+    text-align: center;
+    border: 1px solid rgba(41, 182, 242, 0.2);
+    border-radius: 3px;
+    background: #e9f8fe;
+    font-family: Roboto, sans-serif;
+}
+
+div[data-section-style="19"].first-party-element {
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div[data-section-style="19"].first-party-element.kanban {
+    background-image: url("https://quip-cdn.com/nK0hSyhsb4jrLIL2s5Ma-g");
+    height: 166px;
+}
+
+div[data-section-style="19"].first-party-element.calendar {
+    background-image: url("https://quip-cdn.com/OYujqLny03RILxcLIiyERg");
+    height: 244px;
+}
+
+div[data-section-style="19"].first-party-element.poll {
+    background-image: url("https://quip-cdn.com/fbIiFrcKGv__4NB7CBfxoA");
+    height: 116px;
+}
+
+div[data-section-style="19"].first-party-element.countdown {
+    background-image: url("https://quip-cdn.com/3bPhykD2dBei9sSjCWteTQ");
+    height: 96px;
+}
+
+div[data-section-style="19"].first-party-element.process_bar {
+    background-image: url("https://quip-cdn.com/ybQlHnHEIIBLog5rZmYs_w");
+    height: 36px;
+}
+
+div[data-section-style="19"].first-party-element.project_tracker {
+    background-image: url("https://quip-cdn.com/OFQU087b4Mxzz1ZaHwtjXA");
+    height: 164px;
+}
+
+div[data-section-style="19"] img {
+    margin: 0.5em;
+}
+
+div[data-section-style="19"] img.masked-image {
+    margin: 0;
+    transform-origin: top left;
+}
+
+div[data-section-style="19"] .image-mask {
+    position: relative;
+    overflow: hidden;
+}
+/*
+ * Copyright 2019 Quip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    counter-reset: indent0 indent1 indent2 indent3 indent4 indent5 indent6
+        indent7 indent8;
+}
+
+/* Numbered list */
+div[data-section-style="6"] {
+    counter-reset: indent0 indent1 indent2 indent3 indent4 indent5 indent6
+        indent7 indent8;
+}
+div[data-section-style="6"].list-numbering-continue {
+    counter-reset: none;
+}
+div[data-section-style="6"].list-numbering-restart-at {
+    counter-reset: indent0 var(--indent0) indent1 indent2 indent3 indent4
+        indent5 indent6 indent7 indent8;
+}
+div[data-section-style="6"] ul {
+    /* indent0 is not reset since it is shared across the div elements */
+    list-style-type: none !important;
+}
+div[data-section-style="6"] ul ul {
+    counter-reset: indent1;
+}
+div[data-section-style="6"] ul ul ul {
+    counter-reset: indent2;
+}
+div[data-section-style="6"] ul ul ul ul {
+    counter-reset: indent3;
+}
+div[data-section-style="6"] ul ul ul ul ul {
+    counter-reset: indent4;
+}
+div[data-section-style="6"] ul ul ul ul ul ul {
+    counter-reset: indent5;
+}
+div[data-section-style="6"] ul li {
+    counter-increment: indent0;
+}
+div[data-section-style="6"] ul ul li {
+    counter-increment: indent1;
+}
+div[data-section-style="6"] ul ul ul li {
+    counter-increment: indent2;
+}
+div[data-section-style="6"] ul ul ul ul li {
+    counter-increment: indent3;
+}
+div[data-section-style="6"] ul ul ul ul ul li {
+    counter-increment: indent4;
+}
+div[data-section-style="6"] ul ul ul ul ul ul li {
+    counter-increment: indent5;
+}
+div[data-section-style="6"] ul li:before {
+    content: counter(indent0, decimal) ". ";
+}
+div[data-section-style="6"] ul ul li:before {
+    content: counter(indent1, lower-alpha) ". ";
+}
+div[data-section-style="6"] ul ul ul li:before {
+    content: counter(indent2, lower-roman) ". ";
+}
+div[data-section-style="6"] ul ul ul ul li:before {
+    content: counter(indent3, decimal) ". ";
+}
+div[data-section-style="6"] ul ul ul ul ul li:before {
+    content: counter(indent4, lower-alpha) ". ";
+}
+div[data-section-style="6"] ul ul ul ul ul ul li:before {
+    content: counter(indent5, lower-roman) ". ";
+}
+</style></head><body><h1 id='temp:C:GSaf36281949c22456786c0344b9'>Quick Notes - Rev:</h1>
+
+<h1 id='temp:C:GSaa0db68a2154b4da6b8a5f04f4'><span style="color:#cc0300" textcolor="#cc0300">CSS Flexbox:<br></span></h1>
+
+<b>Sources:</b> <a href="https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/">https://www.joshwcomeau.com/css/interactive-guide-to-flexbox/</a><br/>
+
+<br/>
+
+When we flip display to flex, we create a “flex formatting context”. This means that, by default, all children will be positioned according to the Flexbox layout algorithm.<br/>
+
+ <br/>
+
+<h2 id='temp:C:GSa44ec77d5a41c4c56ab1f4e895'><span style="color:#bf0ac2" textcolor="#bf0ac2">Flex direction:</span></h2>
+
+<div style="" data-section-style='6' class=""><ul id='temp:C:GSa28ecd266d85146b990a3e174d'><li id='temp:C:GSa1c318efe797a43069c8765b7c' class='' value='1'>It is for controlling the direction of the element in a row or a column, by default the items will stack side by side in a row but we can flip it to column using flex <b><code>direction: column;</code></b> property.
+
+<br/></li></ul></div><div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/6WkQ1k2D7Wlz9EYasAwkLA?a=zghpEf7ESJaJwkCz722ckumeFugEpAuXQEr650vbzsoa' id='temp:C:GSa5c4247fe2a1a483487f15ece1' width='800' height='471' alt="image.png"></img></div><div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/geZkdlcdvoI4gu2pSUsvGw?a=yaYss7iTH2sW94esf6afKLX89oumHKWttsr3pkLQl2sa' id='temp:C:GSa077f957d817f406ca497017f1' alt="image.png"></img></div><div style="" class="" data-section-style='5'><ul id='temp:C:GSaebc86038eff940a3a67478461'><li id='temp:C:GSa3c1830e0d77a43dd9b503a6de' class='' value='1'>With<b> <code>flex-direction: row</code></b>, the primary axis runs horizontally, from left to right.
+
+<br/></li><li id='temp:C:GSa43de21d5033d4de6971bcd647' class=''>When we flip to <b><code>flex-direction: column</code></b>, the primary axis runs vertically, from top to bottom.
+
+<br/></li></ul></div><div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/EmdIkPRzUueJ03Vj4bLJXQ?a=dCzxAVYnSdnmwzajtMQdMsXxPNzuslgRqj8FsV7sIOwa' id='temp:C:GSa306025eb7a874d8fb5c06819f' width='800' height='469' alt="image.png"></img></div>The children will be positioned by default according to the following 2 rules:<br/>
+
+<br/>
+
+<b>Primary axis: </b>Children will be bunched up at the start of the container.<br/>
+
+<b>Cross axis: </b>Children will stretch out to fill the entire container.<br/>
+
+<br/>
+
+<b>Values:</b><br/>
+
+<pre id='temp:C:GSa629016da6f50432c8954d0b97'>        .container {<br>                flex-direction: row | row-reverse | column | column-reverse;<br>            }</pre>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSa1c79e4a1caaa4b679ee31dfa0'><li id='temp:C:GSa377a198fcc124a8eb308b050a' class='' value='1'><code>row</code> (default): left to right in <code>ltr</code>; right to left in <code>rtl</code>
+
+<br/></li><li id='temp:C:GSab26c039c21c34905818cce265' class=''><code>row-reverse</code>: right to left in <code>ltr</code>; left to right in <code>rtl</code>
+
+<br/></li><li id='temp:C:GSad34df4c2fb1549ee998d3a9db' class=''><code>column</code>: same as <code>row</code> but top to bottom
+
+<br/></li><li id='temp:C:GSa22b96651e4804d9cb5641de80' class=''><code>column-reverse</code>: same as <code>row-reverse</code> but bottom to top
+
+<br/></li></ul></div><h2 id='temp:C:GSa4c357973e5ae4203b9f84b3ff'><span style="color:#bf0ac2" textcolor="#bf0ac2">Alignment</span></h2>
+
+<h3 id='temp:C:GSa3e296635349348338adaec2ff'>1. justify-content:</h3>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSa58eb2d80211b4e97b64ed7044'><li id='temp:C:GSae01c6e885c604136bc8a76ce8' class='' value='1'>You can change how the items are distributed among the primary axis using the  <code>justify-content</code> property.
+
+<br/></li><li id='temp:C:GSaf0d7d1a6b7fb49ff901904ce6' class=''>When it comes to the primary axis, we don't generally think in terms of aligning a single child. Instead, it's all about the distribution of the group.
+
+<br/></li><li id='temp:C:GSad07f9043d8db452f819872d2c' class=''>We can bunch all the items up in a particular spot (with <b><code>flex-start, center, and flex-en</code>d</b>), or we can spread them apart (with <code><b>space-between, space-around, and space-evenly)</b></code>.
+
+<br/></li></ul></div><b>Sure, here’s a quick revision of the flexbox alignment options:</b><br/>
+
+<pre id='temp:C:GSa376311b6b7a34e9498386b903'>        <code>.container {<br>            justify-content: flex-start <br>                             flex-end <br>                             center <br>                             space-between <br>                             space-around <br>                             space-evenly <br>                             start <br>                             end | left | right ... + safe | unsafe;<br>                    }</code></pre>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/7ZXUOUiTN_JD5jal-qZrWQ?a=Vab4aig3a7qqpxPmjaa0j0h0OrsOyV6BJdvMKj30Phwa' id='temp:C:GSaa7d9fa8d0eab4d34bcbfe6e4d' alt="image.png"></img></div><div style="" class="" data-section-style='5'><ul id='temp:C:GSa16197d6fc97b4750bac679a44'><li id='temp:C:GSadb84e91443364f898524f395e' class='' value='1'><b>flex-start</b>: Items start at the beginning of the flex-direction.
+
+<br/></li><li id='temp:C:GSa1d5fa31f4dae45ffab3274381' class=''><b>flex-end</b>: Items align at the end of the flex-direction.
+
+<br/></li><li id='temp:C:GSabffeaad2aa5c445881460ff21' class=''><b>start</b>: Items align at the start of the writing mode.
+
+<br/></li><li id='temp:C:GSa04175e8dd2c548d8a20d5d011' class=''><b>end</b>: Items align at the end of the writing mode.
+
+<br/></li><li id='temp:C:GSa128eb6c80387403aa14907d2a' class=''><b>left</b>: Items align to the left (if compatible with flex-direction).
+
+<br/></li><li id='temp:C:GSa361d3dbb77384c2794af61758' class=''><b>right</b>: Items align to the right (if compatible with flex-direction).
+
+<br/></li><li id='temp:C:GSa8034b9b42dbb4270a2426f3ac' class=''><b>center</b>: Items are centered along the line.
+
+<br/></li><li id='temp:C:GSa8bb8c294d07345bbaef66bfb4' class=''><b>space-between</b>: Items are spaced with the first at the start and the last at the end.
+
+<br/></li><li id='temp:C:GSa5be6ddbc77724343860fffa0e' class=''><b>space-around</b>: Equal space around items, with extra space on edges.
+
+<br/></li><li id='temp:C:GSa821922e33dfa4d1fb4e756a90' class=''><b>space-evenly</b>: Equal space between items and container edges.
+
+<br/></li></ul></div><br/>
+
+<span style="color:#cc0300" textcolor="#cc0300">For the<b> cross axis</b>, things are a bit different. We use the<b> <code>align-items</code> </b>property:</span><br/>
+
+<br/>
+
+<h3 id='temp:C:GSa23de61e164b3483cb52a9b1b6'>2. Align-items: </h3>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSa6f2d2cbd436c48ae82ed5adbb'><li id='temp:C:GSa200912ec56f64f9881cd7f459' class='' value='1'>You can change how the items are distributed among the cross axis using the  <code>justify-content</code> property.
+
+<br/></li><li id='temp:C:GSaef0d0fe6ea204933abaea5ab1' class=''>Same as justify-content but for cross axis.  Think of it as the <code>justify-content</code> version for the cross-axis.
+
+<br/></li></ul></div><div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/7YHUJRZHW1xwbu7fAP9tlA?a=hvBLqvrT09tXRkFainEkB7aNzwyTBJgE1a6ECMl27ZIa' id='temp:C:GSa2b3220e6bd4c4ae68b2346b66' alt="image.png"></img></div><b>Here's a brief revision for cross-axis alignment options:</b><br/>
+
+<br/>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSa4a78aab95c2e43cfab1ad8fab'><li id='temp:C:GSa3b533ed995174bfa8738196af' class='' value='1'><b>stretch</b>: Items stretch to fill the container (respects min/max-width).
+
+<br/></li><li id='temp:C:GSaf987a3e05c3344d58bf4e0ac9' class=''><b>flex-start / start / self-start</b>: Items align at the start of the cross-axis (depends on flex-direction or writing-mode).
+
+<br/></li><li id='temp:C:GSa1c08e853930c4c0485eb6df9c' class=''><b>flex-end / end / self-end</b>: Items align at the end of the cross-axis (depends on flex-direction or writing-mode).
+
+<br/></li><li id='temp:C:GSae9b3e5b963c74e72a06aa2315' class=''><b>center</b>: Items are centered on the cross-axis.
+
+<br/></li><li id='temp:C:GSadbc2350c21654a22986e31877' class=''><b>baseline</b>: Items align based on their text baselines.
+
+<br/></li></ul></div>It's interesting… With align-items, we have some of the same options as<code> justify-content</code>, but there isn't a perfect overlap.<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/yv8-8U3ERdYkWuxeoNCDjA?a=X52CHsghXemqSztSq7Jk9GMXKuSHTUytT8ix8e7DJt4a' id='temp:C:GSa5808fae6e580480ca17583625' alt="image.png"></img></div><br/>
+
+<h3 id='temp:C:GSa1522ba41cfd944348cd021542'>3. Align-self:</h3>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSa71dfb40151e94c97a675b62f3'><li id='temp:C:GSaa5167d0578c3491c962f02569' class='' value='1'>Unlike <code><b>justify-content </b></code>and <b><code>align-items, </code><code>align-self</code></b> is applied to the child element, not the container. <b>It allows us to change the alignment of a specific child along the cross axis:</b>
+
+<br/></li><li id='temp:C:GSa02a0badad17d4e10ab7100229' class=''>This allows the default alignment (or the one specified by <code>align-items</code>) to be overridden for individual flex items.
+
+<br/></li><li id='temp:C:GSaa6fa85fdf1c54fef932d1f177' class=''>Only works on cross axis.
+
+<br/></li></ul></div><div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/YIJuqVe3WtYeyTeWyiYu_w?a=YQWatnrNvdg6utEVxAkHNyxgVNS8q3wzwJnMbvXkeVYa' id='temp:C:GSaf2c23ed72e294114a5a88d8a0' alt="image.png"></img></div><pre id='temp:C:GSa19629051565c4456ac8628f99'>        .container {<br>            <code> align-self: auto | <br>                         flex-start | <br>                         flex-end | <br>                         center | <br>                         baseline | stretch;</code><br>                    }</pre>
+
+<b>Note that float, clear and vertical-align have no effect on a flex item.</b><br/>
+
+<br/>
+
+<code>align-self</code> has all the same values as align-items. In fact, they change the exact same thing.<code> align-items</code> is syntactic sugar, a convenient shorthand that automatically sets the alignment on all the children at once.<br/>
+
+<br/>
+
+<span style="color:#cc0300" textcolor="#cc0300"><i><b>let's give a proper definition to all 4 terms we've been talking about:</b></i></span><br/>
+
+<div style="" data-section-style='6' class=""><ul id='temp:C:GSaae235a744e2c49c586f0e6aed'><li id='temp:C:GSa7463b8ffc0ba4f3a82ee009c1' class='' value='1'><b>justify </b>— to position something along the primary axis.
+
+<br/></li><li id='temp:C:GSa641cd93b316b4ce797cda6066' class=''><b>align </b>— to position something along the cross axis.
+
+<br/></li><li id='temp:C:GSa4380409b57f5460481e6c789e' class=''><b>content </b>— a group of “stuff” that can be distributed.
+
+<br/></li><li id='temp:C:GSaa252dc17e41a49df8bad48f02' class=''><b>items </b>— single items that can be positioned individually.
+
+<br/></li></ul></div><h2 id='temp:C:GSa3a7c81a80bb14d969c44a61a8'><span style="color:#f13df5" textcolor="#f13df5">Hypothetical size:</span></h2>
+
+<div style="" data-section-style='6' class=""><ul id='temp:C:GSa0f7d8e90240b4a3785b766358'><li id='temp:C:GSa99d02b9f2ef04a9ba239c86ed' class='' value='1'>
+
+<br/></li></ul></div><hr style='width:100%'><h1 id='temp:C:GSa815d198c90f74bfc905f49071'><span style="color:#cc0300" textcolor="#cc0300">CSS Grid:<br></span></h1>
+
+<h3 id='temp:C:GSa3ceae2ffd7a148e2a600c2e06'><span style="color:#37d629" textcolor="#37d629">IMP P:</span></h3>
+
+<div style="" data-section-style='6' class=""><ul id='temp:C:GSa1d116e6d82674afbaa357df32'><li id='temp:C:GSa894ad621688b4c468e9f3dc5a' class='' value='1'> CSS Grid is a 2D layout 
+
+<br/></li><li id='temp:C:GSa50e59a8e9f8e4835871965ac5' class=''>
+
+<br/></li></ul></div><h2 id='temp:C:GSa5f32820c41314d2498d0d90fa'><span style="color:#f13df5" textcolor="#f13df5">Grid terminology:</span></h2>
+
+<div style="" data-section-style='6' class=""><ul id='temp:C:GSaf1cc811a2a0d4cd9864ba3513'><li id='temp:C:GSac3809dc43d6b4030bb256ec1a' class='parent' value='1'>Grid Container:
+
+<br/></li><ul><li id='temp:C:GSa854ed6eab236434ba5ec24b51' class=''>The element on which the grid container( <code>display: grid;</code> )is applied is the direct parent to all the grid items.
+
+<br/></li></ul></ul></div><pre id='temp:C:GSa58629a3e41b340e783777cd52'>        &lt;div class="container" <br>            &lt;div class=“item item-1”&gt; &lt;/div&gt;<br>            &lt;div class=“item item-2”&gt; &lt;/div&gt;<br>            &lt;div class=“item item-3”&gt; &lt;/div&gt;<br>        &lt;/div&gt;</pre>
+
+<div style="--indent0: 2" data-section-style='6' class="list-numbering-restart-at"><ul id='temp:C:GSaf2edd0ded50845c3b9bb92c29'><li id='temp:C:GSad9d35be313d543debaf2e44d8' class='parent' value='1'>Grid items:
+
+<br/></li><ul><li id='temp:C:GSa68cdfaa7122d412b97248aa2f' class='parent'>They are the children (i.e. the direst decedents) of the grid containers 
+
+<br/></li><ul><li id='temp:C:GSab6c73a5689a241f7bb82aa751' class=''> In the below example the items are the gris items but sun-item isn’t.
+
+<br/></li></ul></ul></ul></div><pre id='temp:C:GSa84acd0fda1084d4e8b09f9a55'>        &lt;div class="container" <br>            &lt;div class=“item item-1”&gt; &lt;/div&gt;<br>            &lt;div class=“item item-2”&gt;<br>               &lt;div class="sub-item"&gt; &lt;/div&gt; // Not the children  <br>            &lt;/div&gt;<br>            &lt;div class=“item item-3”&gt; &lt;/div&gt;<br>        &lt;/div&gt;</pre>
+
+<div style="--indent0: 3" data-section-style='6' class="list-numbering-restart-at"><ul id='temp:C:GSa663f8e9a56f940acaa4c27af7'><li id='temp:C:GSad39552b126984ff6aea03dcdc' class='' value='1'>Grid line:
+
+<br/></li></ul></div>In CSS Grid, <b>grid lines</b> are the dividing lines that create the structure of your grid layout. They are either:<br/>
+
+<br/>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSad624920eb6fd421db70414490'><li id='temp:C:GSad74c419d75e7466c98edf9cfb' class='' value='1'><b>Column grid lines</b> (vertical lines that separate columns)
+
+<br/></li><li id='temp:C:GSac2072068cca74912a7b6ac1b1' class=''><b>Row grid lines</b> (horizontal lines that separate rows)
+
+<br/></li></ul></div>These lines are numbered, starting from 1 at the far left or top of the grid, and they help define where items will be placed.<br/>
+
+<br/>
+
+Here’s a visual example:<br/>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/GSaAAAziCR7/jo7H4_AQQbhJdO9rDAjntQ?a=rJCx6rcvK2sLJMYpdQr0rqnIwYYJeAFr5alzJJ7x0FQa' id='temp:C:GSa048ade4510d449408330fca27' alt="image.png"></img></div><br/>
+
+<br/>
+
+In this example, the <b>yellow line</b> would represent the <b>column grid line</b> between columns 1 and 2.<br/>
+
+<br/>
+
+<h3 id='temp:C:GSa7dba8f50593e48f79d5b5c118'>Summary:</h3>
+
+<div style="" class="" data-section-style='5'><ul id='temp:C:GSacb63a16f00f54a7bb156d3b59'><li id='temp:C:GSa7745ee0c1ea84707bbbec3b5e' class='' value='1'>Grid lines define the structure in CSS Grid.
+
+<br/></li><li id='temp:C:GSaa1950a205e2c4381810a62051' class=''>Vertical lines = column grid lines.
+
+<br/></li><li id='temp:C:GSafaa77396982e4a3b9c726fe99' class=''>Horizontal lines = row grid lines.
+
+<br/></li></ul></div><div style="--indent0: 4" data-section-style='6' class="list-numbering-restart-at"><ul id='temp:C:GSad4ab182216554d0fa7c6c94f5'><li id='temp:C:GSa3dda189c23254ff5ade83c2a6' class='' value='1'>Grid cell:
+
+<br/></li></ul></div>The space <br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<hr style='width:100%'><br/>
+
+</body></html>

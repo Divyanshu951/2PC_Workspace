@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic HTML Adder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #f9f9f9;
+            overflow-y: auto;
+        }
+
+        .added-element {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .arrow-button {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px 0 0 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .arrow-button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden-input {
+            display: none;
+            position: fixed;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .hidden-input input {
+            width: 200px;
+            padding: 5px;
+        }
+
+        .hidden-input button {
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .hidden-input button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <h1>Dynamic HTML Adder</h1>
+        <p>Click the arrow button to add new styled HTML content.</p>
+    </div>
+    <button class="arrow-button" id="add-html-btn">&#x276F;</button>
+
+    <div class="hidden-input" id="input-box">
+        <input type="text" id="html-input" placeholder="Enter HTML content">
+        <button id="add-content-btn">Add</button>
+    </div>
+
+    <script>
+        const addButton = document.getElementById('add-html-btn');
+        const inputBox = document.getElementById('input-box');
+        const addContentButton = document.getElementById('add-content-btn');
+        const contentContainer = document.getElementById('content');
+        const htmlInput = document.getElementById('html-input');
+
+        // Toggle input box visibility
+        addButton.addEventListener('click', () => {
+            inputBox.style.display = inputBox.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Add content dynamically
+        addContentButton.addEventListener('click', () => {
+            const newHTML = htmlInput.value.trim();
+            if (newHTML) {
+                const newElement = document.createElement('div');
+                newElement.className = 'added-element';
+                newElement.innerHTML = newHTML;
+                contentContainer.appendChild(newElement);
+                htmlInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
