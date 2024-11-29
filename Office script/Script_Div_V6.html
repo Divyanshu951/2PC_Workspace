@@ -202,7 +202,7 @@
             padding: 10px;
             cursor: move;
             z-index: 10;
-            background-color: #2196F3;
+            background-color: #21252b;
             color: #fff;
             border-radius: 8px;
             margin: 1px;
@@ -221,7 +221,7 @@
             border: 1px solid #ccc;
 
             resize: both;
-            overflow: auto;
+            overflow: hidden;
         }
 
         h1 {
@@ -247,31 +247,33 @@
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #2e2e2e; /* Dark background for the table */
+}
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            font-size: 14px;
-        }
+th,
+td {
+    border: 1px solid #555; /* Lighter border for dark mode */
+    padding: 10px;
+    font-size: 14px;
+}
 
-        th {
-            background-color: #f2f2f2;
-            color: #333;
-        }
+th {
+    background-color: #444; /* Darker background for header */
+    color: #f1f1f1; /* Lighter text for header */
+}
 
-        td {
-            background-color: #fafafa;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            width: 132px;
-            color: black;
-        }
+td {
+    background-color: #333; /* Dark background for table cells */
+    color: #f1f1f1; /* Lighter text for table cells */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 132px;
+}
+
 
         button {
             padding: 8px 12px;
@@ -279,7 +281,7 @@
             cursor: pointer;
             width: 100px;
             border: none;
-            background-color: #007BFF;
+            background-color: #21252b;
             color: #fff;
             border-radius: 4px;
             transition: background-color 0.3s ease;
@@ -929,7 +931,7 @@
     <textarea class="notepad-xx" placeholder="This is a resizable notepad. You can type here..."></textarea>
 
     <div id="mydiv">
-        <div class="toggle-buttons" style="display: flex; justify-content: space-between;">
+        <div class="toggle-buttons" style="display: flex; justify-content: space-between; background-color: #85878b; border-radius: 8px;">
             <button id="toggleButton" style="cursor: pointer;">Hide</button>
             <div id="mydivheader" class="drag-me" style="flex-grow: 1;">Drag me!</div>
         </div>
@@ -942,8 +944,8 @@
             <table>
                 <tr>
                     <th>Result Type</th>
-                    <th>Date</th>
                     <th>Action</th>
+                    <th>Date</th>
                 </tr>
                 <tr>
                     <td>
@@ -951,18 +953,19 @@
                         <input id="desiredOffset" type="number" value="0" onchange="calculateDesired()" style="font-weight: bold; font-size: 20px; width: 50px;">
                         </span>
                     </td>
-                    <td id="desiredDateResult"></td>
                     <td><button id="desiredDateBtn" onclick="copyToClipboard2('desiredDateResult', 'desiredDateBtn')">Copy</button></td>
+                    <td id="desiredDateResult"></td>
+
                 </tr>
                 <tr>
-                    <td><span style="color:orangered;font-weight:bold;">[IRD]</span> <span style="color:black;">Date + 30</span></td>
-                    <td id="plus30Result"></td>
+                    <td><span style="color:orangered;font-weight:bold;">[IRD]</span> <span style="color:rgb(255, 255, 255);">Date + 30</span></td>
                     <td><button id="plus30Btn" onclick="copyToClipboard2('plus30Result', 'plus30Btn')">Copy</button></td>
+                    <td id="plus30Result"></td>
                 </tr>
                 <tr>
-                    <td><span style="color:orangered;font-weight:bold;">[3DI]</span> <span style="color:black;">Date + 3</span></td>
-                    <td id="plus3Result"></td>
+                    <td><span style="color:orangered;font-weight:bold;">[3DI]</span> <span style="color:rgb(255, 255, 255);">Date + 3</span></td>
                     <td><button id="plus3Btn" onclick="copyToClipboard2('plus3Result', 'plus3Btn')">Copy</button></td>
+                    <td id="plus3Result"></td>
                 </tr>
                 <tr>
                     <td>
@@ -974,12 +977,12 @@
                         </select>
                         </span>
                     </td>
-                    <td id="irDateResult"></td>
                     <td><button id="irDateBtn" onclick="copyToClipboard2('irDateResult', 'irDateBtn')">Copy</button></td>
+                    <td id="irDateResult"></td>
                 </tr>
                 <tr>
                     <td>
-                        <span style="color:orangered;font-weight:bold;">[RD]</span> <span style="color:black;"> +
+                        <span style="color:orangered;font-weight:bold;">[RD]</span> <span style="color:rgb(255, 255, 255);"> +
                         <select id="dynamicOffset1" onchange="calculateRD()" style="font-weight: bold; font-size: 20px;">
                             <option value="7">7</option>
                             <option value="14" selected>14</option>
@@ -988,12 +991,12 @@
                         </select>
                         </span>
                     </td>
-                    <td id="dynamicDateResult1"></td>
                     <td><button id="dynamicDateBtn1" onclick="copyToClipboard2('dynamicDateResult1', 'dynamicDateBtn1')">Copy</button></td>
+                    <td id="dynamicDateResult1"></td>
                 </tr>
                 <tr>
                     <td>
-                        <span style="color:orangered;font-weight:bold;">[PDD]</span> <span style="color:black;"> +
+                        <span style="color:orangered;font-weight:bold;">[PDD]</span> <span style="color:rgb(255, 255, 255);"> +
                         <select id="dynamicOffset2" onchange="calculatePDD()" style="font-weight: bold; font-size: 20px;">
                             <option value="14" selected>14</option>
                             <option value="30">30</option>
@@ -1001,8 +1004,8 @@
                         </select>
                         </span>
                     </td>
-                    <td id="dynamicDateResult2"></td>
                     <td><button id="dynamicDateBtn2" onclick="copyToClipboard2('dynamicDateResult2', 'dynamicDateBtn2')">Copy</button></td>
+                    <td id="dynamicDateResult2"></td>
                 </tr>
             </table>
 
