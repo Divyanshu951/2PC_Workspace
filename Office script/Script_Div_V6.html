@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
-            font-family: "Noto Sans", sans-serif;
+            font-family: "Verdana", sans-serif;
         }
 
         body {
@@ -115,28 +115,6 @@
             outline: none;
         }
 
-        
-
-        /* .refund {
-            position: fixed;
-            top: 480px;
-            right: 20px;
-            background-color: #ccc;
-            padding: 2px;
-            cursor: pointer;
-            border-radius: 5px;
-
-            font-size: 20px;
-            width: 300px;
-            color: black;
-            border-radius: 10px;
-            border-style: double;
-            border-color: white;
-            background-color: black;
-        } */
-
-        /*NOTEPAD*/
-
         .notepad {
             position: fixed;
             bottom: 0px;
@@ -219,7 +197,8 @@
             border-radius: 8px;
         }
 
-        #mydivheader, #toggleButton {
+        #mydivheader,
+        #toggleButton {
             padding: 10px;
             cursor: move;
             z-index: 10;
@@ -794,6 +773,120 @@
             border: 1px solid black;
             border-radius: 5px;
         }
+
+        /* slider */
+
+        .font-size-controls {
+            border-radius: 4px;
+            position: fixed;
+            top: 20px;
+            right: 70px;
+            display: flex;
+            gap: 1px;
+            background-color: inherit;
+        }
+
+        body {
+            font-size: 16px;
+            /* default font size */
+        }
+
+        #decrease-font,
+        #increase-font {
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            margin-left: 2px;
+        }
+
+        .button-container .custom-button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-button.copied {
+            background-color: #28a745 !important;
+        }
+
+        /* Transparent popup style */
+
+        #font-size-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.486);
+            /* Semi-transparent background */
+            color: white;
+            font-size: 40px;
+            /* Big font size */
+            padding: 30px;
+            border-radius: 10px;
+            display: none;
+            /* Hidden by default */
+            z-index: 1000;
+            /* Ensure it's on top */
+        }
+
+        /* Display max-width percentage */
+
+        #max-width-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.486);
+            color: white;
+            font-size: 40px;
+            /* Big font size */
+            padding: 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            opacity: 0;
+            /* Initially hidden */
+            transition: opacity 0.3s ease;
+        }
+
+        #max-width-display.show {
+            opacity: 1;
+        }
+
+        .hidden-content,
+        .hidden-content2,
+        .hidden-content3,
+        .hidden-content4 {
+            display: none;
+            position: fixed;
+            top: 7%;
+            right: 3%;
+            transform: translate(-50%, -50%);
+            padding: 8px 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 5px;
+        }
+
+        .trigger-div:hover+.hidden-content {
+            display: block;
+        }
+
+        .trigger-div2:hover+.hidden-content2 {
+            display: block;
+        }
+
+        .trigger-div3:hover+.hidden-content3 {
+            display: block;
+        }
+
+        .trigger-div4:hover+.hidden-content4 {
+            display: block;
+        }
     </style>
 
     <link rel="icon" type="image/png" href="https://www.20i.com/blog/wp-content/uploads/2020/10/Favicons-740x416.png">
@@ -803,7 +896,7 @@
 
     <!-- /* TIMER BLOCK HTML*/ -->
 
-    <div class="timer-block">
+    <div class="timer-bloc trigger-div2">
         <div class="timer-container" id="timer-container">
             <div class="timer" id="timer">
                 <div class="digit" id="minute1">0</div>
@@ -817,10 +910,10 @@
         <audio id="alarm" src="audio.wav"></audio>
     </div>
 
+    <div class="hidden-content2" style="font-size: 16px;">👉 Tap to start <br> 👉 Double tap to restart/Reset</div>
+
+
     <!-- /* TIMER BLOCK END*/ -->
-
-
-
 
     <div id="color-picker-popup" class="popup" style="display: none;">
         <h4>Customize Colors:</h4>
@@ -837,9 +930,9 @@
 
     <div id="mydiv">
         <div class="toggle-buttons" style="display: flex; justify-content: space-between;">
-        <button id="toggleButton" style="cursor: pointer;">Hide</button>
-        <div id="mydivheader" style="flex-grow: 1;">Click here to move</div>
-    </div>
+            <button id="toggleButton" style="cursor: pointer;">Hide</button>
+            <div id="mydivheader" class="drag-me" style="flex-grow: 1;">Drag me!</div>
+        </div>
         <div class="date-container">
             <h1 style="color: white;">Date Calculator</h1>
 
@@ -877,6 +970,7 @@
                         <select id="irOffset" onchange="calculateIR()" style="font-weight: bold; font-size: 20px;">
                             <option value="60">60</option>
                             <option value="90">90</option>
+                            <option value="120" selected>120</option>
                         </select>
                         </span>
                     </td>
@@ -932,6 +1026,7 @@
             <div class="chat-content69" id="chatContent69">
                 <!-- Chat content will be added here -->
             </div>
+
             <!-- Button to add a new line -->
             <button class="add-line-button69" onclick="showInputField()">Add Line</button>
 
@@ -954,7 +1049,7 @@
     <div id="text-container">
         <p style="color: DodgerBlue; cursor: pointer;" onclick="copyToClipboard(this)">
             <span style="position: relative;">
-                <span id="greeting-text">Hello, My name is <span id="name-placeholder">[Insert_Name_Below_and_Press_Enter]</span>. How may I help you today?</span>
+                <span id="greeting-text">Hello, my name is <span id="name-placeholder">[Insert_Name_Below_and_Press_Enter]</span>. Thank you for contacting Amazon Support. How may I assist you today?</span>
             <span style="visibility: hidden; position: absolute; background-color: black; color: #fff; text-align: center; padding: 5px; border-radius: 5px; top: -30px; left: 50%; transform: translateX(-50%);" class="tooltiptext"></span>
             </span>
         </p>
@@ -964,19 +1059,40 @@
 
         <!-- change -->
 
+        <p style="display: inline;">Apology:</p>
 
-        <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
-            <span class="tooltip">
-        Terribly sorry about the whole experience, we really never want any of our customer to suffer through such incidents.
-        <span class="tooltiptext" id="tooltip2"></span>
-            </span>
-        </p>
+        <button class="custom-button" onclick="copyCustomText(1)" style="background-color: #21252b;">General</button>
+        <button class="custom-button" onclick="copyCustomText(2)" style="background-color: #21252b;">DNR</button>
+        <button class="custom-button" onclick="copyCustomText(3)" style="background-color: #21252b;">IM</button>
+        <button class="custom-button" onclick="copyCustomText(4)" style="background-color: #21252b;">Pre-D</button>
+        <button class="custom-button" onclick="copyCustomText(5)" style="background-color: #21252b;">DD</button>
+        <button class="custom-button" onclick="copyCustomText(6)" style="background-color: #21252b;">Returns</button>
+        <button class="custom-button" onclick="copyCustomText(7)" style="background-color: #21252b;">Wrong</button>
+
         <!-- Add more lines as needed -->
 
+        <!-- Font buttons -->
+        <div class="font-size-controls trigger-div" id="scroll-div">
+            <button id="decrease-font">-</button>
+            <button id="increase-font">+</button>
+        </div>
+
+
+        <div class="hidden-content" style="font-size: 16px;">👉 Scroll to change text width <br> 👉 +/- for text size</div>
+
+        <!-- Transparent popup to show font size -->
+        <div id="font-size-popup">Font Size: 16px</div>
+
+        <div id="max-width-display"></div>
+        <!-- Div to show max-width percentage -->
+
+        <!-- Your other content here -->
+
+
         <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Could you please confirm if you received empty box with missing item or nothing was delivered?
-        <span class="tooltiptext" id="tooltip2"></span>
+                Could you confirm if you received an empty box, a missing item, or nothing was delivered at all?
+                <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
@@ -989,7 +1105,7 @@
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Please give me a moment to analyze your previous conversation.
+                Please allow me a moment to review your previous conversation.
         <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
@@ -998,15 +1114,14 @@
 
         <p style="color:DodgerBlue;" class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Could you please stay connected for two minutes while I check this for you?
+                Could you kindly stay connected for two minutes while I check this for you?
         <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        I’m sorry this is taking longer than expected, could you please stay connected for another 2 minutes while I check this for you?
-        <span class="tooltiptext" id="tooltip2"></span>
+                I apologize for the delay. This is taking longer than expected. Could you please stay connected for another two minutes while I continue to check this for you?                <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
@@ -1023,15 +1138,15 @@
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        I can create a return label and you will receive the full refund once we receive the order, Is that alright with you?
+                I can create a return label, and you'll receive a full refund once we receive the returned order. Does that work for you?
         <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Would you like the return to be an label less drop off or a normal pick up for return?
-        <span class="tooltiptext" id="tooltip2"></span>
+                Would you prefer a label-less drop-off return or a normal pick-up for the item?
+                <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
@@ -1039,8 +1154,8 @@
 
         <p style="color:#98FB98;" class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-                I have successfully submitted a return request for your order. The return label will be sent to you within the next 2 - 4 hours.
-        <span class="tooltiptext" id="tooltip2"></span>
+                Your return request has been successfully submitted. The return label will be emailed to you within the next 2 to 4 hours.
+                <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
@@ -1055,10 +1170,9 @@
 
         <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> Others:</h3>
 
-
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Just to confirm, Are you referring to the item XXXXX?
+            Just to confirm, are you referring to the item SPECIFIC_ITEM?
         <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
@@ -1148,8 +1262,8 @@
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Please stay connected while i transfer this chat to my manager.
-        <span class="tooltiptext" id="tooltip2"></span>
+                Please stay connected while I transfer this chat to my manager for further assistance.
+                <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
 
@@ -1171,13 +1285,13 @@
 
         <p class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        Thank you for your understanding.
-        <span class="tooltiptext" id="tooltip2"></span>
+                Thank you for your patience and understanding.
+                <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
         <p style="color:#98FB98;" class="copyable-line" onclick="copyToClipboard(this)">
             <span class="tooltip">
-        You're most welcome
+        You're most welcome XXX.
         <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
@@ -1203,6 +1317,35 @@
         <span class="tooltiptext" id="tooltip2"></span>
             </span>
         </p>
+
+
+
+        <div class="addline" style="display: flex; gap: 10px; align-items: center;">
+
+            <h3 style="color:rgba(224, 104, 102, 1); text-align: center;" onclick="toggleVisibility()"> Extra: </h3>
+
+            <div onclick="toggleVisibility2()" class="remove-div trigger-div3" style="height: 20px; width: 28px;  border-radius: 4px; border: 0.25px solid rgb(34, 34, 34); cursor: pointer; align-self: center;">[_]</div>
+
+            <div class="hidden-content3" style="font-size: 16px;">👉 Tap to Hide/Show Entry barr</div>
+
+            <div class="add-line-container" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <input type="text" id="newLineInput" placeholder="Enter new line" style="padding: 2px; font-size: 16px; border: 2px solid #ccc; border-radius: 5px; width: 300px;">
+                <button onclick="addNewLine()" style="font-size: 10px; border: none; border-radius: 5px; cursor: pointer;">
+                    Add Line
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="hide-extra">
+
+            <!-- Existing container for the lines -->
+            <div id="copyableLinesContainer">
+                <!-- New lines will be added here -->
+            </div>
+
+        </div>
 
 
         <h2 style="color:rgba(224, 104, 102, 1);red; text-align: center;"> EMAILS:</h2>
@@ -1252,7 +1395,7 @@
                 <span style="color: white;">B3</span>
                 <span style="color: white;">UNA</span>
             </div>
-            <div class="result" id="result"></div>
+            <div class="result" id="result" style="font-size: 14px;"></div>
         </div>
     </div>
 
@@ -1262,7 +1405,7 @@
     <button class="dark-mode-switch" style="height: 35px; width: 35px;" onclick="toggleDarkMode1()"></button>
 
     <!-- Vertical button layout -->
-    <div class="vertical-buttons">
+    <div class="vertical-buttons trigger-div4">
         <!-- Background Color Section -->
         <div>
             <input type="color" id="bgColorPicker" class="color-picker" style="top: 10px;">
@@ -1273,6 +1416,8 @@
             <input type="color" id="textColorPicker" class="color-picker" style="top: 60px;">
         </div>
     </div>
+
+    <div class="hidden-content4" style="font-size: 16px;">👉 Top box: Background color <br> 👉 Bottom box: Text color</div>
 
 
     <button class="dark-mode-switch" style="top: 70px; background-color: #080e2c; height: 35px; width: 35px; border: 1px solid white;" onclick="toggleDarkMode2()"></button>
@@ -1286,6 +1431,19 @@
     <script>
         let lastShiftPress = 0; // Track the timestamp of the last Shift key press
         const DOUBLE_SHIFT_INTERVAL = 300; // Max interval for detecting double Shift (in ms)
+
+        // Slider 
+        const increaseButton = document.getElementById('increase-font');
+        const decreaseButton = document.getElementById('decrease-font');
+        const fontSizePopup = document.getElementById('font-size-popup');
+        let currentFontSize = 16; // default font size in pixels
+
+        const scrollDiv = document.getElementById('scroll-div');
+        const textContainer = document.getElementById('text-container');
+        const maxWidthDisplay = document.getElementById('max-width-display');
+        let maxWidth = 50; // Starting max-width in percentage
+        let displayTimeout; // Timeout for hiding the display
+
         const minute1 = document.getElementById("minute1");
         const minute2 = document.getElementById("minute2");
         const second1 = document.getElementById("second1");
@@ -1295,6 +1453,16 @@
         // Background Color Picker
         const bgColorPicker = document.getElementById("bgColorPicker");
         const bgColorBox = document.getElementById("bgColorBox");
+
+        const customSentences = [
+            "I’m terribly sorry about your experience; we never want our customers to face such issues. Let me assist you right away.",
+            "I’m terribly sorry to hear that you haven’t received your order despite it being marked as delivered. This must be frustrating, and I’m here to help investigate this for you.",
+            "I’m really sorry that a part of your order is missing. I can only imagine how disappointing this must be. Let me look into this right away and ensure we get the missing item to you.",
+            "I completely understand your frustration with the delay, and I’m truly sorry for the inconvenience caused. Please allow me a moment to investigate and ensure it arrives soon.",
+            "My sincerest apologies for the inconvenience caused by receiving a damaged/defective item. I understand how disappointing this is, and I’ll take swift action to resolve this for you.",
+            "I’m very sorry that your return has not yet been refunded. This is not the experience we want for our customers, and I’ll make sure to check on the status and expedite the process for you.",
+            "I’m really sorry you received the wrong item. This is not the experience we want for you. I’ll look into the issue and work on a solution as quickly as possible."
+        ];
 
         const alarm = document.getElementById("alarm");
 
@@ -1315,6 +1483,42 @@
             }
         });
 
+        // Function to copy text and provide feedback
+        function copyCustomText(buttonIndex) {
+            const customButton = document.querySelectorAll('.custom-button')[buttonIndex - 1];
+            const text = customSentences[buttonIndex - 1];
+
+            // Copy text to clipboard
+            navigator.clipboard.writeText(text).then(() => {
+                // Update button UI - change background to green
+                customButton.classList.add('copied');
+
+                // Revert button color after 3 seconds
+                setTimeout(() => {
+                    customButton.classList.remove('copied');
+                }, 3000);
+            });
+        }
+
+        function toggleVisibility() {
+            var extraContent = document.querySelector('.hide-extra');
+
+            if (extraContent.style.display === 'none') {
+                extraContent.style.display = 'block';
+            } else {
+                extraContent.style.display = 'none';
+            }
+        }
+
+        function toggleVisibility2() {
+            var extraInput = document.querySelector('.add-line-container');
+
+            if (extraInput.style.display === 'none') {
+                extraInput.style.display = 'flex';
+            } else {
+                extraInput.style.display = 'none';
+            }
+        }
 
         function copyText(cellNumber) {
             const inputElement = document.getElementById("input-box-" + cellNumber);
@@ -1349,19 +1553,76 @@
         });
 
         document.getElementById("toggleButton").addEventListener("click", () => {
-  // Get all elements with the class 'date-container'
-  const dateContainers = document.querySelectorAll(".date-container");
+            // Get all elements with the class 'date-container'
+            const dateContainers = document.querySelectorAll(".date-container");
+            const dragme = document.querySelectorAll(".drag-me");
 
-  // Toggle the display property for each element
-  dateContainers.forEach(container => {
-    if (container.style.display === "none") {
-      container.style.display = ""; // Reset to normal (CSS-defined state)
-    } else {
-      container.style.display = "none"; // Hide the element
-    }
-  });
-});
 
+            // Toggle the display property for each element
+            dateContainers.forEach(container => {
+                if (container.style.display === "none") {
+                    container.style.display = ""; // Reset to normal (CSS-defined state)
+                } else {
+                    container.style.display = "none"; // Hide the element
+                }
+            });
+
+            dragme.forEach(container => {
+                if (container.style.fontSize === "0px") {
+                    container.style.fontSize = ""; // Reset to normal (CSS-defined state)
+                } else {
+                    container.style.fontSize = "0px"; // Hide the element by setting font-size to 0
+                }
+            });
+        });
+
+        function showFontSizePopup() {
+            fontSizePopup.style.display = 'block';
+            setTimeout(() => {
+                fontSizePopup.style.display = 'none'; // Hide after 1.5 seconds
+            }, 1000);
+        }
+
+        increaseButton.addEventListener('click', () => {
+            currentFontSize += 1; // increase by 1px
+            document.body.style.fontSize = currentFontSize + 'px';
+            fontSizePopup.textContent = `${currentFontSize}px`; // update font size display
+            showFontSizePopup();
+        });
+
+        decreaseButton.addEventListener('click', () => {
+            if (currentFontSize > 8) { // to prevent font size from going too small
+                currentFontSize -= 1; // decrease by 1px
+                document.body.style.fontSize = currentFontSize + 'px';
+                fontSizePopup.textContent = `${currentFontSize}px`; // update font size display
+                showFontSizePopup();
+            }
+        });
+
+        scrollDiv.addEventListener('wheel', (event) => {
+            event.preventDefault(); // Prevent default scrolling behavior
+
+            if (event.deltaY > 0) {
+                // Scrolling down: increase max-width
+                maxWidth = Math.min(maxWidth + 2, 100); // Cap at 100%
+            } else {
+                // Scrolling up: decrease max-width
+                maxWidth = Math.max(maxWidth - 2, 0); // Cap at 0%
+            }
+
+            // Update the max-width of the text container
+            textContainer.style.maxWidth = `${maxWidth}%`;
+
+            // Show the current max-width percentage
+            maxWidthDisplay.textContent = `${maxWidth}%`;
+            maxWidthDisplay.classList.add('show');
+
+            // Clear any previous timeout and hide the display after 2 seconds
+            clearTimeout(displayTimeout);
+            displayTimeout = setTimeout(() => {
+                maxWidthDisplay.classList.remove('show');
+            }, 2000);
+        });
 
         function copyToClipboard(element) {
             const copyText = element.innerText.trim();
@@ -1379,6 +1640,33 @@
                 tooltip.style.visibility = "hidden";
             }, 1500);
         }
+
+        function addNewLine() {
+            const newLineText = document.getElementById('newLineInput').value.trim();
+
+            if (newLineText) {
+                const newLine = document.createElement('p');
+                newLine.classList.add('copyable-line');
+                newLine.setAttribute('onclick', 'copyToClipboard(this)');
+
+                const tooltip = document.createElement('span');
+                tooltip.classList.add('tooltip');
+                tooltip.innerHTML = newLineText;
+
+                const tooltipText = document.createElement('span');
+                tooltipText.classList.add('tooltiptext');
+                tooltip.appendChild(tooltipText);
+
+                newLine.appendChild(tooltip);
+                document.getElementById('copyableLinesContainer').appendChild(newLine);
+
+                // Clear the input field
+                document.getElementById('newLineInput').value = '';
+            } else {
+                alert("Please enter some text!");
+            }
+        }
+
 
         document.getElementById('set-timer').addEventListener('click', function() {
             // Get the value from the input field
@@ -1441,7 +1729,7 @@
             const totalBreak = break1 + break2 + break3;
             const remainingBreak = 60 - totalBreak;
 
-            document.getElementById('result').innerHTML = `<span style="color: white;">Used Break: </span><span style="color: red; font-size: 24px;">${totalBreak.toFixed(2)}</span> <span style="color: white; font-size: 18px;">minutes</span><br><span style="color: white; font-size: 18px;">Remaining Break:</span> <span style="color: green; font-size: 24px;">${remainingBreak.toFixed(2)}</span> <span style="color: white; font-size: 18px;">minutes</span>`;
+            document.getElementById('result').innerHTML = `<span style="color: white;">Used Break: </span><span style="color: red; font-size: 24px;">${totalBreak.toFixed(2)}</span> <span style="color: white; font-size: 18px;">minutes</span><br><span style="color: white; font-size: 14px;">Remaining Break:</span> <span style="color: green; font-size: 24px;">${remainingBreak.toFixed(2)}</span> <span style="color: white; font-size: 14px;">minutes</span>`;
         }
         // NOTEPAD END
 
@@ -1769,5 +2057,43 @@
         updateTimer();
     </script>
 </body>
+
+<!-- Docs
+
+HOW TO ADD HIDDEN PANNEL ON Top
+<div class="font-size-controls trigger-div" id="scroll-div">
+    <button id="decrease-font">-</button>
+    <button id="increase-font">+</button>
+</div>
+
+
+<div class="hidden-content" style="font-size: 16px;">👉 Scroll to change text width <br> 👉 +/- for text size</div>
+
+
+.hidden-content {
+    display: none;
+    position: fixed;
+    top: 7%;
+    right: 3%;
+    transform: translate(-50%, -50%);
+    padding: 8px 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 5px;
+}
+
+.trigger-div:hover + .hidden-content {
+    display: block;
+}
+
+S1: Give the considered div name trigger-div[num]
+S2: make hidden div with class hidden-content[num]
+<div class="hidden-content" style="font-size: 16px;">👉 Tap to starrt <br> 👉 Double tap to restart</div>
+S3: add hidden-content[num] to the CSS
+S4: .trigger-div:hover + .hidden-content {
+    display: block;
+}
+
+add the nums in this accorrdingly -->
 
 </html>
