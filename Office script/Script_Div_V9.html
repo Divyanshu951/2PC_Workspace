@@ -314,29 +314,6 @@
             background-color: #c82333;
         }
 
-        .notepad-xx {
-            position: fixed;
-            display: none;
-            left: 5px;
-            width: 300px;
-            height: 100px;
-            padding: 15px;
-            border: 2px solid #007BFF;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            resize: both;
-            overflow: auto;
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            z-index: 10;
-        }
-
-        .notepad-xx:focus {
-            border-color: #0056b3;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        }
-
         .copyable-line69 {
             display: inline-flex;
             align-items: center;
@@ -428,7 +405,7 @@
             background-color: #007bff;
             /* Blue color */
             cursor: pointer;
-            z-index: 1001;
+            z-index: 1000;
             transition: left 0.3s ease;
             border-radius: 4px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -436,9 +413,9 @@
         }
 
         .toggle-button-red {
-            top: 25px;
+            top: 90px;
             background-color: rgb(202, 94, 94);
-            z-index: 11;
+            z-index: 1002;
         }
 
         /* Open state */
@@ -461,7 +438,6 @@
             color: #b0b0b0;
             /* Lighter gray text for dark theme */
             text-align: center;
-            margin-top: 10px;
         }
 
         .copyable-line69 {
@@ -640,6 +616,45 @@
             transition: transform 0.5s ease;
             /* Smooth zoom effect on hover */
         }
+        
+        
+        #result1, #result2, #result3, #result4, #result5  {
+            white-space: pre-wrap; /* Ensures line breaks and white spaces are respected */
+            margin-bottom: 10px;
+            background-color: #1c1c1e;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: block;
+            color: white;
+            transition: transform 0.5s ease;
+            font-size: 12px; /* Adjust font size as needed */
+        }
+
+
+
+        /* side panel red */
+
+        .side-panelred {
+            width: 420px; /* Width of the side panel */
+            height: 100vh; /* Full height */
+            position: fixed;
+            top: 0;
+            padding: 20px;
+            left: 0; /* Change to right: 0; for right-side panel */
+            background-color: #242424; /* Dark background */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            overflow-y: auto; /* Scrollable content */
+            transform: translateX(-100%); /* Initially hidden */
+            transition: transform 0.3s ease; /* Smooth open/close animation */
+            z-index: 1001;
+            border-right: 1px solid #fff;
+        }
+
+    /* Show the side panel */
+    .side-panelred.activered {
+      transform: translateX(0);
+    }
 
 
         /* TIMER BLOCK */
@@ -740,6 +755,20 @@
             height: 2px;
             overflow: hidden;
             /* Prevents scrollbars */
+        }
+
+        .input-area2 {
+            width: 90%;
+            padding: 12px;
+            padding-top: 0;
+            margin-bottom: 12px;
+            background-color: #333;
+            color: #e0e0e0;
+            border: 1px solid #444;
+            border-radius: 8px;
+            resize: vertical;
+            height: 30px;
+            overflow: hidden;
         }
 
         .input-text:focus,
@@ -974,12 +1003,202 @@
         .highlighted {
             background-color: rgb(156, 95, 95) !important;
         }
+
+        .red-top {
+            position: sticky;
+            top: 0;
+        }
+
+        .red-button {
+            /* width: 100%; */
+    background-color: #21252b
+        }
+
+        .red-button:hover {
+            background-color: #c82333;
+        }
+
+        .red-button:active {
+            background-color: rgb(40, 167, 69);
+        }
+
+        .email-section {
+        margin-bottom: 20px;
+    }
+
+    .button-containerred {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        flex-direction: row;
+    }
+
+    .red-button {
+        flex: 20;
+        padding: 10px;
+    }
+
+    .toggleVisibilityred {
+        flex: 1; /* 20% width */
+        /* padding: 10px; */
+    }
+
+    .linered {
+        border-top: 1px solid #444;
+    margin: 15px 0;
+    }
+
+
+    .red-input {
+        margin-left: 12px;
+        background-color: white;
+        color: black;
+    }
+
+
+        .form-group {
+            padding: 15px;
+            padding-bottom: 5px;
+            border: 1px solid #444;
+            position: sticky;
+            top: -10px;
+            background-color: inherit;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #a1a1a6;
+        }
+
+        .form-group input {
+            width: calc(100% - 10px);
+    padding: 6px 5px;
+    font-size: 0.7rem;
+    border: 1px solid #575757;
+    border-radius: 4px;
+    background-color: #3a3a3c;
+    color: #f5f5f7;
+        }
+
+        .form-group input::placeholder {
+            color: #a1a1a6;
+        }
+
+        .form-group input:focus {
+            border-color: #007aff;
+            outline: none;
+        }
+
+        .form-group button:hover {
+            background: #005bb5;
+        }
+
+        .item {
+            padding: 15px;
+            border-bottom: 1px solid #444;
+        }
+
+        .item input {
+            border: none;
+            background: #3a3a3c;
+            width: calc(100% - 20px);
+            font-size: 1rem;
+            color: #f5f5f7;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .item input:focus {
+            outline: none;
+            border: 1px solid #007aff;
+        }
+
+        .item-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .item button {
+            padding: 5px 10px;
+            background: #007aff;
+            color: #f5f5f7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .item button.remove {
+            background: #ff3b30;
+        }
+
+        .item button:hover {
+            opacity: 0.9;
+        }
+
+        .add-item {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .add-item button {
+            padding: 10px 20px;
+            background: #007aff;
+            color: #f5f5f7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .add-item button:hover {
+            background: #005bb5;
+        }
+
+        .button-container-email {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        #button1, #button2, #button3, #button4, #button5 {
+            max-width: 75px;
+            background-color: #144895;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            overflow: hidden;
+            font-size: 10px;
+        }
+
+        .magic-b {
+            position: fixed;
+            top: 7px;
+            right: 8px;
+            width: fit-content;
+        }
+
+        .m1 {
+            right: 62px;
+        }
+
     </style>
 
     <link rel="icon" type="image/png" href="https://www.20i.com/blog/wp-content/uploads/2020/10/Favicons-740x416.png">
 </head>
 
 <body>
+
+
     <div id="timer-container" style="text-align: center; padding: 7px; border: 0.1px solid #e8eee8; border-radius: 10px; padding-bottom: 0;">
         <input type="number" id="time-input" style="width: 90px; display: inline-block; vertical-align: middle; padding: 5px; font-size: 14px; border: 1px solid #ccc; border-radius: 5px;" value="120" min="0" />
         <button id="set-timer" style="font-size: 12px; display: inline-block; vertical-align: middle; width: 80px; padding: 4px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Set Timer</button>
@@ -1001,8 +1220,6 @@
         <br>
         <button id="submit-colors" onclick="applyCustomColors()">Submit</button>
     </div>
-
-    <textarea class="notepad-xx" placeholder="This is a resizable notepad. You can type here..."></textarea>
 
     <div id="mydiv">
         <div class="toggle-buttons" style="display: flex; justify-content: space-between; background-color: #85878b; border-radius: 8px;">
@@ -1100,7 +1317,7 @@
         <div class="side-panel69" id="sidePanel69">
             <span class="dark-mode-icon69" onclick="toggleDarkMode()">🌙</span>
 
-            <h2 style="margin: 0;">Custom Lines</h2>
+            <h2 style="margin: 0;" onclick="togglePanel()">Custom Lines</h2>
             <div>
                 <button id="increaseBtn" style="position: absolute;
             top: 20px;
@@ -1127,13 +1344,47 @@ right: 100px; height: 30px; width: auto;">-</button>
 
         <!-- Toggle Button -->
         <div class="toggle-button69" style="width: 35px;" id="toggleButton69" onclick="togglePanel()"></div>
-        <div class="toggle-button-red" style="width: 35px;" id="toggleButton69Red" onclick="togglePanered()"></div>
+        <div class="toggle-button-red" style="width: 35px;"onclick="toggleSidePanelred()"></div>
 
+        
+            
+        </div>
+
+        <!-- red side panel -->
+        <div class="side-panelred" id="sidePanelred" style="padding: 10px;">
+            <h2 class="header" style="margin: 0; color: #fff;" onclick="toggleSidePanelred()">Email panel</h2>
+            <button class="magic-b m1" onclick="showAllSection()" >FX</button>
+            <button class="magic-b m2" onclick="showAllemailinput()" >IN</button>
+            <div class="form-group" style="height: auto;">
+                <label for="initialDate">Select Initial Date:</label>
+                <input type="date" id="initialDate">
+
+                <label for="linkInput">Link to Replace [LINK] (optional):</label>
+
+                <div style="display: flex; gap: 20px">
+                    <input style="height: 20px; margin: auto;" type="link" id="linkInput" placeholder="Enter your link here">
+                    <button style="align-self: center; width: auto; margin: auto; background-color: #007aff;" onclick="calculateDatesAndLinks()">Draft</button>
+                </div>
+                <div class="button-container-email">
+                    <button id="button1" onclick="showOnlySection(1)">Wrong</button>
+                    <button id="button2" onclick="showOnlySection(2)">Reg-IR</button>
+                    <button id="button3" onclick="showOnlySection(3)">Re-IR</button>
+                    <button id="button4" onclick="showOnlySection(4)">Refund</button>
+                    <button id="button5" onclick="showOnlySection(5)">BT-5</button>
+                </div>
+            </div>
+
+            <div class="test">
+            
+           <div class="chat-content69 red-bottom" style="margin-top: 0;">
+            <div id="inputFields"></div>
+           </div>
+        </div>
         </div>
 
         <h1 style="text-align: center; color: white; text-decoration: dashed;">CAP Script </h1>
 
-        <h3 style="color:rgba(224, 104, 102, 1);; text-align: center;"> OPENING: </h3>
+        <h3 style="color:rgba(224, 104, 102, 1); text-align: center;"> OPENING: </h3>
 
         <div id="text-container">
             <p style="color: DodgerBlue; cursor: pointer;" onclick="copyToClipboard(this)">
@@ -1467,7 +1718,7 @@ right: 100px; height: 30px; width: auto;">-</button>
             </div>
 
 
-            <h2 style="color:rgba(224, 104, 102, 1);red; text-align: center;"> EMAILS:</h2>
+            <h2 style="color:rgba(224, 104, 102, 1);" onclick="toggleVisibilityEmail()"> EMAILS:</h2>
             <div class="refund">
                 <div class="email-container-new">
                     <!-- Cell 1 -->
@@ -1569,7 +1820,7 @@ right: 100px; height: 30px; width: auto;">-</button>
                 "RSPR Recommendation: ID Pending Validation\nAction to be Taken: ID Requested\nAdditional Context: N/A\n***CAP***",
                 "RSPR Recommendation: ID Verified - Grant Concession\nAction to be Taken: Concession granted - ID Verified\nAdditional Context: N/A\n***CAP***",
                 "RSPR Recommendation: Confirm Return and Request ID\nAction to be Taken: Created_Return Request_ID_again\nAdditional Context: N/A\n***CAP***",
-                "RSPR Recommendation: ID Verified – Confirm Return & Grant Concession\nAction to be Taken: Created_Return/Concession_Granated\Additional Context: N/A\n***CAP***"
+                "RSPR Recommendation: ID Verified – Confirm Return & Grant Concession\nAction to be Taken: Created_Return Concession_Granted\nAdditional Context: N/A\n***CAP***"
             ];
 
             let selectedFirstRowIndex = null;
@@ -1628,7 +1879,7 @@ right: 100px; height: 30px; width: auto;">-</button>
                     if (currentTime - lastShiftPress < DOUBLE_SHIFT_INTERVAL) {
                         // Double Shift detected
                         event.preventDefault(); // Optional: Prevent default behavior
-                        togglePanel(); // Trigger the panel toggle function
+                        toggleSidePanelred(); // Trigger the panel toggle function
                     }
                     lastShiftPress = currentTime; // Update the last Shift key press time
                 }
@@ -1699,6 +1950,11 @@ right: 100px; height: 30px; width: auto;">-</button>
                 });
             }
 
+            function toggleSidePanelred() {
+                const panel = document.getElementById('sidePanelred');
+                panel.classList.toggle('activered');
+            }
+
 
             function toggleVisibility() {
                 var extraContent = document.querySelector('.hide-extra');
@@ -1719,6 +1975,7 @@ right: 100px; height: 30px; width: auto;">-</button>
                     extraInput.style.display = 'none';
                 }
             }
+        
 
             function toggleVisibilityID() {
                 var extraContent = document.querySelector('.ID-container');
@@ -1727,6 +1984,16 @@ right: 100px; height: 30px; width: auto;">-</button>
                     extraContent.style.display = 'block';
                 } else {
                     extraContent.style.display = 'none';
+                }
+            }
+
+            function toggleVisibilityEmail() {
+                var extraContentemail = document.querySelector('.email-container-new');
+
+                if (extraContentemail.style.display === 'none') {
+                    extraContentemail.style.display = 'flex';
+                } else {
+                    extraContentemail.style.display = 'none';
                 }
             }
 
@@ -1740,6 +2007,20 @@ right: 100px; height: 30px; width: auto;">-</button>
                 }
             }
             
+            const buttons = document.querySelectorAll('.button-container-email button');
+
+        buttons.forEach((button, index) => {
+            let isRenamed = false; // Track if the button has been renamed
+            button.addEventListener('click', () => {
+                if (!isRenamed) {
+                    const newName = prompt(`Enter new name for Button ${index + 1}:`);
+                    if (newName) {
+                        button.textContent = newName;
+                    }
+                    isRenamed = true; // Mark the button as renamed
+                }
+            });
+        });
 
             function copyText(cellNumber) {
                 const inputElement = document.getElementById("input-box-" + cellNumber);
@@ -1931,16 +2212,16 @@ right: 100px; height: 30px; width: auto;">-</button>
 
 
 
-            window.addEventListener('beforeunload', function(e) {
+           window.addEventListener('beforeunload', function(e) {
                 // Custom message for the warning
-                var confirmationMessage = 'Break you entered will not be saved.';
+               var confirmationMessage = 'Break you entered will not be saved.';
 
                 // Standard way to set the message in modern browsers
-                e.returnValue = confirmationMessage;
+               e.returnValue = confirmationMessage;
 
                 // For older browsers
-                return confirmationMessage;
-            });
+               return confirmationMessage;
+           });
 
             // NOTEPAD
             function calculateBreak() {
@@ -2203,6 +2484,133 @@ right: 100px; height: 30px; width: auto;">-</button>
                 document.getElementById('customTextInput69').value = '';
                 document.getElementById('inputLine69').style.display = 'none'; // Hide input field after submission
             }
+            
+            
+            const inputFields = document.getElementById('inputFields');
+
+// Generate input fields dynamically
+for (let i = 1; i <= 5; i++) {
+    inputFields.innerHTML += `
+        <div class="segment-wrapper wrapper-${i}">
+            <div class="email-section" id="section${i}">
+                <input type="text" class="input-text red-input" id="emailTitle${i}" placeholder="Enter your title here">
+                <textarea class="input-area2" id="emailText${i}" placeholder="Paste your email text here. Include '[DATE]', '[DATE + X DAYS]', or '[LINK]'."></textarea>
+                <div>
+                    <div id="result${i}" class="result-text"></div>
+                    <div class="button-containerred">
+                        <button class="red-button" onclick="copyToClipboard3(${i})">Copy</button>
+                        <button class="toggleVisibilityred" onclick="toggleSectionVisibility(${i})">-</button>
+                    </div>
+                    <div class="linered"></div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function showOnlySection(sectionIndex) {
+    for (let i = 1; i <= 5; i++) {
+        const section = document.getElementById(`section${i}`);
+        if (i === sectionIndex) {
+            section.style.display = 'block'; // Show only the clicked section
+        } else {
+            section.style.display = 'none'; // Hide all other sections
+        }
+    }
+}
+
+function showAllSection() {
+    for (let i = 1; i <= 5; i++) {
+        const section = document.getElementById(`section${i}`);
+        if (section && section.style.display === 'none') {
+            section.style.display = 'block';
+        }
+    }
+}
+
+function showAllemailinput() {
+    for (let i = 1; i <= 5; i++) {
+        const emailText = document.getElementById(`emailText${i}`);
+        if (emailText) {
+            // Toggle between 'none' and 'block'
+            emailText.style.display = emailText.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+}
+
+function calculateDatesAndLinks() {
+    const initialDate = new Date(document.getElementById('initialDate').value);
+    const linkInput = document.getElementById('linkInput').value;
+
+    // Validate the initial date
+    if (isNaN(initialDate.getTime())) {
+        alert("Please enter a valid initial date.");
+        return;
+    }
+
+    // Process the email texts and update the results
+    for (let i = 1; i <= 5; i++) {
+        const emailText = document.getElementById(`emailText${i}`).value;
+        if (emailText) {
+            const updatedEmailText = replaceDateAndLink(emailText, initialDate, linkInput);
+            document.getElementById(`result${i}`).innerHTML = updatedEmailText; // Use innerHTML to preserve styling
+        }
+    }
+
+    // Clear the input field after processing
+    document.getElementById('linkInput').value = '';
+}
+
+
+
+function replaceDateAndLink(text, initialDate, link) {
+    const dateRegex = /\[DATE(\s*\+\s*(\d+)\s*DAYS?)?\]/gi;
+    const linkRegex = /\[LINK\]/gi;
+
+    let updatedText = text.replace(dateRegex, (match, p1, p2) => {
+        let formattedDate;
+        if (p2) {
+            const days = parseInt(p2);
+            const newDate = new Date(initialDate.getTime() + days * 24 * 60 * 60 * 1000);
+            formattedDate = formatDate(newDate);
+        } else {
+            formattedDate = formatDate(initialDate);
+        }
+        return `<span style="color: rgba(224, 104, 102, 1); font-size: 12px; font-weight: bold;">${formattedDate}</span>`;
+    });
+
+    updatedText = updatedText.replace(linkRegex, `<span style="color: rgba(224, 104, 102, 1); font-size: 12px; font-weight: bold;">${link || '[LINK]'}</span>`);
+
+    return updatedText;
+}
+
+
+function formatDate(date) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-GB', options);
+    return formattedDate.replace(/ /g, '-');
+}
+
+function copyToClipboard3(index) {
+    const resultText = document.getElementById(`result${index}`).textContent;
+    navigator.clipboard.writeText(resultText)
+        .catch(err => console.error('Error copying text:', err));
+}
+
+function toggleSectionVisibility(index) {
+    const textarea = document.getElementById(`emailText${index}`);
+    const result = document.getElementById(`result${index}`);
+    const toggleButton = textarea.nextElementSibling.nextElementSibling; // Select the toggle button
+
+    const isHidden = textarea.style.display === 'none';
+
+    // Toggle visibility
+    textarea.style.display = isHidden ? 'block' : 'none';
+    result.style.display = isHidden ? 'block' : 'none';
+
+    // Update button text
+    toggleButton.textContent = isHidden ? 'Hide' : 'Show';
+}
 
             function toggleDarkMode() {
                 const body = document.body;

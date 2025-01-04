@@ -1,8 +1,7 @@
-body {
-  
+.parent {
+  margin-top: 20px; /* Parent's margin */
 }
 
-.one {
-  height: 100px;
-  width: 100px;
+.child {
+  margin-top: 40px; /* Child's margin */
 }

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copy Text from Buttons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .ID-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 600px;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .buttonID {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+      width: 100%;
+      max-width: 150px;
+      text-align: center;
+    }
+
+    .buttonID:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .selected {
+      background-color: green !important;
+    }
+
+    .highlighted {
+      background-color: red !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="ID-container">
+    <div class="button-container">
+      <div class="button-row">
+        <div id="buttonID1" class="buttonID" onclick="selectFirstRow(1, this)">DNR</div>
+        <div id="buttonID2" class="buttonID" onclick="selectFirstRow(2, this)">IM</div>
+        <div id="buttonID3" class="buttonID" onclick="selectFirstRow(3, this)">Wrong</div>
+        <div id="buttonID4" class="buttonID" onclick="selectFirstRow(4, this)">Returns</div>
+        <div id="buttonID5" class="buttonID" onclick="selectFirstRow(5, this)">Pre-D</div>
+        <div id="buttonID6" class="buttonID" onclick="selectFirstRow(6, this)">DD</div>
+      </div>
+      <div class="button-row">
+        <div id="buttonID7" class="buttonID" onclick="copyCombined(1, this)">Request ID</div>
+        <div id="buttonID8" class="buttonID" onclick="copyCombined(2, this)">ID Limit Reached</div>
+        <div id="buttonID9" class="buttonID" onclick="copyCombined(3, this)">ID Pending Validation</div>
+        <div id="buttonID10" class="buttonID" onclick="copyCombined(4, this)">ID Verified - Grant Concession</div>
+        <div id="buttonID11" class="buttonID" onclick="copyCombined(5, this)">Confirm Return and Request ID</div>
+        <div id="buttonID12" class="buttonID" onclick="copyCombined(6, this)">ID Verified – Confirm Return & Grant Concession</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const firstRowText = [
+      "***CAP***\nContact Reason: DNR\nDid you ask the customer if they received a wrong item or missing item from their package? N/A",
+      "***CAP***\nContact Reason: Item Missing\nDid you ask the customer if they received a wrong item or missing item from their package? Confirmed Item Missing",
+      "***CAP***\nContact Reason: Wrong Item Received\nDid you ask the customer if they received a wrong item or missing item from their package? Confirmed Wrong Item",
+      "***CAP***\nContact Reason: Returns Related\nDid you ask the customer if they received a wrong item or missing item from their package? N/A",
+      "***CAP***\nContact Reason: Pre-Delivery\nDid you ask the customer if they received a wrong item or missing item from their package? N/A",
+      "***CAP***\nContact Reason: Damaged/Defective\nDid you ask the customer if they received a wrong item or missing item from their package? N/A"
+    ];  
+
+    const secondRowText = [
+      "RSPR Recommendation: Request ID\nAction to be Taken: ID Requested\nAdditional Context: N/A\n***CAP***",
+      "RSPR Recommendation: ID Limit Reached\nAction to be Taken: Reqauted ID again\nAdditional Context: N/A\nScale Weight : \n***CAP***",
+      "RSPR Recommendation: ID Pending Validation\nAction to be Taken: ID Requested\nAdditional Context: N/A\n***CAP***",
+      "RSPR Recommendation: ID Verified - Grant Concession\nAction to be Taken: ID Verified - Granted concession\nAdditional Context: N/A\n***CAP***",
+      "RSPR Recommendation: Confirm Return and Request ID\nAction to be Taken: Created_Return Request_ID_again\nAdditional Context: N/A\n***CAP***",
+      "RSPR Recommendation: ID Verified – Confirm Return & Grant Concession\nAction to be Taken: Created_Return/Concession_Granated\Additional Context: N/A\n***CAP***"
+    ];
+
+    let selectedFirstRowIndex = null;
+    let timeoutId = null;
+
+    function selectFirstRow(buttonId, buttonElement) {
+      resetButtons();
+
+      buttonElement.classList.add("selected");
+      selectedFirstRowIndex = buttonId - 1;
+
+      timeoutId = setTimeout(resetButtons, 5000);
+    }
+
+    function copyCombined(buttonId, buttonElement) {
+      if (selectedFirstRowIndex === null) return;
+
+      const combinedText = `${firstRowText[selectedFirstRowIndex]}\n${secondRowText[buttonId - 1]}`;
+
+      navigator.clipboard.writeText(combinedText)
+        .then(() => {
+          buttonElement.classList.add("highlighted");
+
+          setTimeout(() => {
+            buttonElement.classList.remove("highlighted");
+            resetButtons();
+          }, 3000);
+        })
+        .catch(err => console.error("Failed to copy: ", err));
+    }
+
+    function resetButtons() {
+      document.querySelectorAll(".buttonID").forEach(button => {
+        button.classList.remove("selected", "highlighted");
+      });
+      selectedFirstRowIndex = null;
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+    }
+  </script>
+</body>
+</html>

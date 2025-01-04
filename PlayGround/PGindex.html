@@ -3,84 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scroll Interaction</title>
+  <title>Ancer example</title>
   <style>
-    /* Fixed scroll div with existing styles */
-    #scroll-div {
-      position: fixed;
-      top: 196px;
-      right: 20px;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      padding: 8.5px 10px;
-      width: 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      outline: none;
+    ul {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative; /* For tooltip positioning */
     }
 
-    /* Tooltip on hover */
-    #scroll-div:hover::after {
-      content: "Scroll Me";
-      position: absolute;
-      top: -30px; /* Position above the button */
-      right: 50%; /* Center horizontally */
-      transform: translateX(50%);
-      background-color: black;
-      color: white;
-      padding: 5px 8px;
-      font-size: 12px;
-      border-radius: 5px;
-      white-space: nowrap;
-      opacity: 1;
-      transition: opacity 0.2s ease;
-      z-index: 10;
-    }
-
-    /* Smooth tooltip fade-in */
-    #scroll-div::after {
-      opacity: 0;
-    }
-
-    /* Resizable text container */
-    #text-container {
-      max-width: 50%; /* Starting width */
-      margin: 20px auto;
-      padding: 10px;
-      border: 1px solid gray;
-      background-color: lightgray;
-      text-align: center;
-      transition: max-width 0.2s ease;
+    #home, #features , #features2, #features3, #features4  {
+      height: 1000px;
+      border: 4px solid red;
     }
   </style>
 </head>
-<body>
-  <div id="scroll-div">↕</div> <!-- Scroll interaction button -->
-  <div id="text-container">Resizable Text Container</div>
+<body id="nav-bar">
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">features</a></li>
+      <li><a href="#features2">features</a></li>
+      <li><a href="#features3">features</a></li>
+      <li><a href="#features4">features</a></li>
+    </ul>
+  </nav>
 
-  <script>
-    const scrollDiv = document.getElementById('scroll-div');
-    const textContainer = document.getElementById('text-container');
-    let maxWidth = 50; // Starting max-width in percentage
+  <div id="home"></div>
 
-    scrollDiv.addEventListener('wheel', (event) => {
-      event.preventDefault(); // Prevent default scrolling behavior
+  <div id="features" style="border: 4px solid green;"></div>
 
-      if (event.deltaY > 0) {
-        // Scrolling down: increase max-width
-        maxWidth = Math.min(maxWidth + 5, 100); // Cap at 100%
-      } else {
-        // Scrolling up: decrease max-width
-        maxWidth = Math.max(maxWidth - 5, 0); // Cap at 0%
-      }
 
-      textContainer.style.maxWidth = `${maxWidth}%`;
-    });
-  </script>
+  <div id="features2" style="border: 4px solid hotpink;"></div>
+
+
+  <div id="features3" style="border: 4px solid brown;"></div>
+
+  <div id="features4" style="border: 4px solid blue;"></div>
+
+<a href="#nav-bar">Back to top</a>
 </body>
 </html>

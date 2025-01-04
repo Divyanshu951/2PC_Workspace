@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Notes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            background-color: #ecf0f1;
+        }
+
+        #sidebar {
+            width: 200px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+        }
+
+        #sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        #sidebar ul {
+            list-style-type: none;
+        }
+
+        #sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        #sidebar ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+
+        #sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        #main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .note-section {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        pre {
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .topics {
+            position: sticky;
+            top: 10px;
+        }
+
+        .template {
+            display: none;
+        }
+
+        /* Template end */
+
+
+        .flex-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .box {
+            height: 100px;
+            width: 100px;
+            border: 2px solid black;
+        }
+
+        .box:hover {
+            box-shadow: 1px 1px 5px gray;
+        }
+
+        .one,
+        .three,
+        .onea {
+            background: yellow;
+            border: 2px solid blue;
+        }
+
+        .two,
+        .twoa {
+            background: red;
+            border: 2px solid black;
+
+            position: relative;
+            bottom: 20px;
+        }
+
+        .onea {
+            position: relative;
+        }
+
+        .twoa {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h2 style="color: white">Topics</h2>
+
+        <!-- Add new title -->
+        <ul class="topics">
+            <li><a href="#Positioning">Positioning in CSS:</a></li>
+            <li><a href="#css">CSS</a></li>
+            <li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#java">Java</a></li>
+        </ul>
+    </div>
+
+    <div id="main-content">
+        <!-- Add date ranage -->
+        <h1>Coding Notes</h1>
+
+        <!-- TEMPLATE sTART -->
+        <!-- h2 for main heading and h3 for sub heading  -->
+        <div class="template">
+            <div id="template" class="note-section"> <!-- add this to create a section block change the ID-->
+                <h2>Positioning in CSS:</h2> <!-- Main heading of the topic -->
+                <h3>Basic Structure</h3> <!-- Sub heading of the topic -->
+                <pre><code>&lt;!DOCTYPE html&gt;
+    &lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+        &lt;title&gt;Document&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- Content goes here --&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</code></pre>
+            </div>
+        </div>
+        <!-- TEMPLATE END -->
+
+
+
+        <div id="Positioning" class="note-section">
+            <h2>Positioning in CSS:</h2>
+            <h3>Relative positioning</h3>
+            <p>Relative CSS positioning is a layout technique that allows you to adjust an element's position relative to where it would normally appear in the document flow. Here's a concise explanation of how it works:
+            </p>
+            <ul style="margin: 0 40px;">
+                <br>
+                <li><span style="font-weight: bold">Normal flow:</span> By default, elements are positioned according to the normal document flow.
+                </li>
+                <li>
+                    <span style="font-weight: bold">Relative positioning:</span> When you set position: relative; on an element, it remains in the normal flow, but you can now use offset properties to move it.
+                </li>
+                <li><span style="font-weight: bold">Offset properties:</span> You can use top, bottom, left, and right to shift the element from its original position.
+                </li>
+                <li><span style="font-weight: bold">Original space:</span> The element's original space is preserved in the layout, even if it's moved.
+                </li>
+                <li><span style="font-weight: bold">Z-index:</span> Relative positioning allows you to use the z-index property to control stacking order.
+                </li>
+                <br>
+            </ul>
+            <div class="flex-box">
+                <div class="box one"></div>
+                <div class="box two"></div>
+                <div class="box three"></div>
+            </div>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Content goes here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <div id="css" class="note-section">
+            <h2>CSS Positioning</h2>
+            <div class="positioning-div">
+                <p><span style="font-style: italic;">Relative</span> CSS positioning adjusts an element's position relative to where it would normally appear in the document flow.</p>
+            </div>
+            <h3>Flexbox</h3>
+            <pre><code>.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}</code></pre>
+        </div>
+
+        <div id="javascript" class="note-section">
+            <h2>JavaScript</h2>
+            <h3>Arrow Functions</h3>
+            <pre><code>const add = (a, b) => a + b;
+console.log(add(5, 3)); // Output: 8</code></pre>
+        </div>
+
+        <div id="python" class="note-section">
+            <h2>Python</h2>
+            <h3>List Comprehension</h3>
+            <pre><code>squares = [x**2 for x in range(10)]
+print(squares) # Output: [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]</code></pre>
+        </div>
+
+        <div id="java" class="note-section">
+            <h2>Java</h2>
+            <h3>Lambda Expressions</h3>
+            <pre><code>List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5);
+numbers.forEach(n -> System.out.println(n));</code></pre>
+        </div>
+    </div>
+</body>
+</html>
